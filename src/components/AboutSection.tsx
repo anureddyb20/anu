@@ -25,7 +25,7 @@ export default function AboutSection() {
           <div className={styles.imageCol}>
             <div className={styles.imageWrapper}>
               <Image
-                src="/about.jpg"
+                src="/about.png"
                 alt="Anu Reddy Cartoon Avatar"
                 width={500}
                 height={500}
