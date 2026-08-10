@@ -1,0 +1,27 @@
+.main {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.aboutSection {
+  padding: 4rem 2rem 8rem 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+}
+
+.spacer {
+  height: 100px;
+}
+
+@media (max-width: 1024px) {
+  .aboutGrid {
+    grid-template-columns: 1fr;
+  }
+}
