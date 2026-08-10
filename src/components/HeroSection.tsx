@@ -86,13 +86,13 @@ export default function HeroSection() {
           {/* ── ZONE 3: Right stat cards ── */}
           <div className={styles.cardsCol}>
             <div className={`animate-float`}>
-              <FloatingStatCard icon="briefcase" title="3+" subtitle="Projects Completed" />
+              <FloatingStatCard icon="briefcase" title="8+" subtitle="Projects Built" />
             </div>
             <div className={`animate-float-delayed`}>
-              <FloatingStatCard icon="layers" title="5+" subtitle="Technologies Learning" />
+              <FloatingStatCard icon="layers" title="5+" subtitle="Hackathons & Ideathons" />
             </div>
             <div className={`animate-float`}>
-              <FloatingStatCard icon="star" title="Passionate" subtitle="Problem Solver Innovator" />
+              <FloatingStatCard icon="star" title="1" subtitle="Research Paper" />
             </div>
           </div>
 

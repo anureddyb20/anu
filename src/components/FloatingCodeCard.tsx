@@ -11,9 +11,9 @@ export default function FloatingCodeCard() {
           </svg>
         </div>
         <div className={styles.codeContent}>
-          <div className={styles.codeItem}>Clean Code</div>
-          <div className={styles.codeItem}>Scalable Solutions</div>
-          <div className={styles.codeItem}>Pixel Perfect</div>
+          <div className={styles.codeItem}>Software</div>
+          <div className={styles.codeItem}>Electronics</div>
+          <div className={styles.codeItem}>IoT & Embedded</div>
         </div>
         <div className={styles.codeStatus}></div>
       </div>
