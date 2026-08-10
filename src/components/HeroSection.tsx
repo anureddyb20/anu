@@ -59,9 +59,7 @@ export default function HeroSection() {
           {/* ── ZONE 2: Center portrait + globe ── */}
           <div className={styles.portraitCol}>
             {/* Glowing sphere */}
-            <div className={styles.globe}>
-              <div className={styles.globeNetwork}></div>
-            </div>
+            <div className={styles.globe}></div>
 
             {/* Transparent portrait */}
             <div className={styles.personWrap}>
