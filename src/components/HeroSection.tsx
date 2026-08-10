@@ -60,15 +60,7 @@ export default function HeroSection() {
           <div className={styles.portraitCol}>
             {/* Glowing sphere */}
             <div className={styles.globe}>
-              <Image
-                src="/globe.png"
-                alt="Holographic Globe"
-                width={460}
-                height={460}
-                className={styles.globeImg}
-                priority
-                unoptimized
-              />
+              <div className={styles.globeNetwork}></div>
             </div>
 
             {/* Transparent portrait */}
