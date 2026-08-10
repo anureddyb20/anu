@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './HeroSection.module.css';
-import FloatingStatCard from './FloatingStatCard';
-import FloatingCodeCard from './FloatingCodeCard';
+import FloatingStatCard from '@/components/FloatingStatCard';
+import FloatingCodeCard from '@/components/FloatingCodeCard';
 
 export default function HeroSection() {
   return (
@@ -67,8 +67,8 @@ export default function HeroSection() {
               <Image 
                 src="/hero.png" 
                 alt="Anu Reddy B" 
-                width={600} 
-                height={800} 
+                width={450} 
+                height={600} 
                 className={styles.portraitImage}
                 priority
               />
