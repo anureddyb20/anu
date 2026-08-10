@@ -33,7 +33,7 @@
   width: 100%;
   gap: 0;
   position: relative;
-  position: relative; z-index: 10;
+  z-index: 10;
 }
 
 /* ════════════════════════════════════
