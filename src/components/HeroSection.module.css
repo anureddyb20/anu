@@ -179,66 +179,64 @@
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  height: 520px;
+  align-items: center;
+  height: 540px;
 }
 
 /* The big glowing 3D-like sphere behind the person */
 .portraitGlow {
   position: absolute;
-  width: 480px;
-  height: 480px;
+  width: 460px;
+  height: 460px;
   border-radius: 50%;
   top: 50%;
   left: 50%;
-  transform: translate(-55%, -50%);
+  transform: translate(-50%, -50%);
   z-index: 0;
-  /* Deep blue sphere fill */
   background: radial-gradient(
-    circle at 38% 40%,
-    rgba(0, 80, 200, 0.55) 0%,
-    rgba(0, 50, 160, 0.7) 40%,
-    rgba(0, 20, 80, 0.85) 80%,
-    rgba(0, 5, 30, 0.5) 100%
+    circle at 38% 38%,
+    rgba(10, 90, 220, 0.7) 0%,
+    rgba(5, 55, 170, 0.75) 40%,
+    rgba(2, 25, 90, 0.85) 75%,
+    rgba(1, 8, 30, 0.5) 100%
   );
-  /* Glowing outer ring */
   box-shadow:
-    0 0 0 1.5px rgba(0, 160, 255, 0.35),
-    0 0 40px rgba(0, 120, 255, 0.5),
-    0 0 90px rgba(0, 80, 255, 0.25),
+    0 0 0 1.5px rgba(0, 160, 255, 0.4),
+    0 0 50px rgba(0, 120, 255, 0.6),
+    0 0 100px rgba(0, 80, 255, 0.3),
     inset 0 0 60px rgba(0, 120, 255, 0.3),
     inset 0 0 20px rgba(100, 200, 255, 0.15);
 }
 
-/* Grid lines overlaid on the sphere */
+/* Grid lines clipped to sphere shape */
 .portraitGlow::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background-image:
-    linear-gradient(rgba(0, 180, 255, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 180, 255, 0.12) 1px, transparent 1px);
-  background-size: 36px 36px;
-  mask-image: radial-gradient(circle at center, white 55%, transparent 80%);
-  -webkit-mask-image: radial-gradient(circle at center, white 55%, transparent 80%);
+    linear-gradient(rgba(0, 180, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 180, 255, 0.14) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: radial-gradient(circle at center, white 50%, transparent 78%);
+  -webkit-mask-image: radial-gradient(circle at center, white 50%, transparent 78%);
 }
 
-/* Bright edge highlight at top-left of sphere */
+/* Bright edge highlight */
 .portraitGlow::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: radial-gradient(circle at 28% 22%, rgba(130, 210, 255, 0.25) 0%, transparent 55%);
+  background: radial-gradient(circle at 28% 22%, rgba(130, 210, 255, 0.3) 0%, transparent 55%);
 }
 
-/* The person image sits centered on top of the globe */
+/* Person image centered on the globe */
 .portraitContainer {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-55%);
+  transform: translateX(-50%);
   z-index: 2;
   display: flex;
   justify-content: center;
@@ -246,11 +244,10 @@
 }
 
 .portraitImage {
-  width: 390px;
+  width: 340px;
   height: auto;
   object-fit: contain;
-  object-position: top center;
-  filter: drop-shadow(0 0 25px rgba(0, 160, 255, 0.5));
+  filter: drop-shadow(0 0 20px rgba(0, 160, 255, 0.45)) drop-shadow(0 -5px 15px rgba(0, 200, 255, 0.3));
 }
 
 /* Floating Cards Positioning — right side */
