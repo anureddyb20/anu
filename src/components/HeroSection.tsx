@@ -2,6 +2,8 @@ import Image from 'next/image';
 import styles from './HeroSection.module.css';
 import FloatingStatCard from '@/components/FloatingStatCard';
 import FloatingCodeCard from '@/components/FloatingCodeCard';
+import AboutCard from '@/components/AboutCard';
+import ExpertiseCard from '@/components/ExpertiseCard';
 
 export default function HeroSection() {
   return (
@@ -14,7 +16,7 @@ export default function HeroSection() {
         <div className={styles.grid}>
           
           {/* Left Column - Content */}
-          <div className={`${styles.content} animate-fade-in delay-100`}>
+          <div className={`${styles.content} animate-fade-in delay-100`} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div className={styles.statusPill}>
               <span className={styles.statusDot}></span>
               Aspiring Developer
@@ -57,52 +59,62 @@ export default function HeroSection() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
               </a>
             </div>
+            
+            <div style={{ marginTop: '3rem' }}>
+              <AboutCard />
+            </div>
           </div>
           
-          {/* Right Column - Portrait */}
-          <div className={`${styles.portraitWrapper} animate-fade-in delay-300`}>
-            <div className={styles.portraitGlow}></div>
-            
-            <div className={styles.portraitContainer}>
-              <Image 
-                src="/hero.png" 
-                alt="Anu Reddy B" 
-                width={450} 
-                height={600} 
-                className={styles.portraitImage}
-                priority
-              />
+          {/* Right Column */}
+          <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <div className={`${styles.portraitWrapper} animate-fade-in delay-300`}>
+              <div className={styles.portraitGlow}></div>
+              
+              <div className={styles.portraitContainer}>
+                <Image 
+                  src="/hero.png" 
+                  alt="Anu Reddy B" 
+                  width={450} 
+                  height={600} 
+                  className={styles.portraitImage}
+                  priority
+                />
+              </div>
+              
+              {/* Floating Cards */}
+              <div className={`${styles.cardTopRight} animate-float`}>
+                <FloatingStatCard 
+                  icon="briefcase"
+                  title="3+"
+                  subtitle="Projects Completed"
+                />
+              </div>
+              
+              <div className={`${styles.cardMidRight} animate-float-delayed`}>
+                <FloatingStatCard 
+                  icon="layers"
+                  title="5+"
+                  subtitle="Technologies Learning"
+                />
+              </div>
+              
+              <div className={`${styles.cardBotRight} animate-float`}>
+                <FloatingStatCard 
+                  icon="star"
+                  title="Passionate"
+                  subtitle="Problem Solver Innovator"
+                />
+              </div>
+              
+              <div className={`${styles.cardCode} animate-float-delayed`}>
+                <FloatingCodeCard />
+              </div>
+              
             </div>
             
-            {/* Floating Cards */}
-            <div className={`${styles.cardTopRight} animate-float`}>
-              <FloatingStatCard 
-                icon="briefcase"
-                title="3+"
-                subtitle="Projects Completed"
-              />
+            <div style={{ marginTop: 'auto', paddingTop: '3rem' }}>
+               <ExpertiseCard />
             </div>
-            
-            <div className={`${styles.cardMidRight} animate-float-delayed`}>
-              <FloatingStatCard 
-                icon="layers"
-                title="5+"
-                subtitle="Technologies Learning"
-              />
-            </div>
-            
-            <div className={`${styles.cardBotRight} animate-float`}>
-              <FloatingStatCard 
-                icon="star"
-                title="Passionate"
-                subtitle="Problem Solver Innovator"
-              />
-            </div>
-            
-            <div className={`${styles.cardCode} animate-float-delayed`}>
-              <FloatingCodeCard />
-            </div>
-            
           </div>
         </div>
       </div>
