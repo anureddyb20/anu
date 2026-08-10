@@ -20,15 +20,13 @@ export default function HeroSection() {
             </div>
 
             <h1 className={styles.heading}>
-              I build digital <br />
-              <span className={styles.highlight}>experiences</span><br />
-              that matter.
+              Turning ideas into <br />
+              <span className={styles.highlight}>technology</span><br />
+              that matters.
             </h1>
 
             <p className={styles.description}>
-              I'm Anu, an engineering student passionate about
-              building innovative solutions with code, electronics
-              and emerging technologies.
+              Engineering student focused on software, electronics and emerging technologies, turning real-world problems into practical solutions.
             </p>
 
             <div className={styles.ctaGroup}>
