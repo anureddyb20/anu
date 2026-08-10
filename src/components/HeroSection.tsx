@@ -8,7 +8,6 @@ export default function HeroSection() {
     <section className={styles.hero} id="home">
       {/* Background particles / stars */}
       <div className={styles.stars}></div>
-      <div className={styles.bgCodeLeft}></div>
 
       <div className="container">
         <div className={styles.layout}>
