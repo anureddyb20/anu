@@ -24,11 +24,8 @@
   width: 100%;
   max-width: 480px;
   aspect-ratio: 1.25 / 1;
-  border-radius: 28px;
-  overflow: hidden;
-  border: 1px solid rgba(0, 240, 255, 0.15);
-  background: rgba(6, 20, 40, 0.25);
-  box-shadow: 0 0 35px rgba(0, 100, 255, 0.08);
+  background: transparent;
+  margin-top: 4.8rem;
 }
 
 .glowOverlay {
@@ -140,6 +137,7 @@
   
   .handContainer {
     max-width: 420px;
+    margin-top: 0;
   }
   
   .heading {
