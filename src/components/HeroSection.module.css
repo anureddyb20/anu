@@ -13,143 +13,15 @@
   background: transparent;
 }
 
-/* ── Scattered star particles ── */
 .stars {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  /* 60+ scattered dots via box-shadow on a 1px element */
   overflow: hidden;
-}
-.stars::before {
-  content: '';
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: white;
-  box-shadow:
-    /* Cluster around globe - center-right area */
-    52% 12% 0 1px rgba(255,255,255,0.8),
-    58% 8%  0 0px rgba(100,220,255,0.9),
-    63% 15% 0 1px rgba(255,255,255,0.7),
-    70% 10% 0 0px rgba(255,255,255,0.6),
-    75% 18% 0 1px rgba(100,220,255,0.8),
-    80% 7%  0 0px rgba(255,255,255,0.5),
-    48% 22% 0 1px rgba(255,255,255,0.6),
-    55% 28% 0 0px rgba(100,200,255,0.7),
-    67% 22% 0 1px rgba(255,255,255,0.8),
-    72% 30% 0 0px rgba(255,255,255,0.5),
-    78% 25% 0 1px rgba(100,220,255,0.6),
-    83% 20% 0 0px rgba(255,255,255,0.7),
-    88% 15% 0 1px rgba(255,255,255,0.5),
-    90% 30% 0 0px rgba(100,200,255,0.6),
-    85% 40% 0 1px rgba(255,255,255,0.4),
-    50% 40% 0 0px rgba(255,255,255,0.6),
-    57% 48% 0 1px rgba(100,220,255,0.5),
-    44% 35% 0 0px rgba(255,255,255,0.5),
-    40% 20% 0 1px rgba(255,255,255,0.4),
-    35% 15% 0 0px rgba(100,200,255,0.5),
-    /* Left dark area - sparse */
-    8%  20% 0 0px rgba(255,255,255,0.3),
-    15% 35% 0 1px rgba(255,255,255,0.2),
-    5%  55% 0 0px rgba(255,255,255,0.3),
-    20% 65% 0 0px rgba(100,200,255,0.2),
-    12% 80% 0 1px rgba(255,255,255,0.2),
-    25% 10% 0 0px rgba(255,255,255,0.3),
-    /* Right area */
-    92% 50% 0 0px rgba(255,255,255,0.4),
-    95% 65% 0 1px rgba(100,220,255,0.3),
-    88% 70% 0 0px rgba(255,255,255,0.3),
-    93% 80% 0 1px rgba(255,255,255,0.2),
-    /* Bottom area */
-    60% 80% 0 0px rgba(255,255,255,0.3),
-    50% 85% 0 1px rgba(100,200,255,0.4),
-    45% 75% 0 0px rgba(255,255,255,0.3),
-    70% 75% 0 1px rgba(255,255,255,0.2);
-  /* Convert % to vw/vh-like values - using transform */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none; /* Hidden, actual stars are below */
-}
-
-/* Actual scattered stars using pseudo element on stars div */
-.stars::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
-    radial-gradient(circle, rgba(100,220,255,0.8) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.6) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(100,200,255,0.9) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px),
-    radial-gradient(circle, rgba(100,220,255,0.7) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px),
-    radial-gradient(circle, rgba(100,200,255,0.8) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.5) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(100,220,255,0.6) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px),
-    radial-gradient(circle, rgba(100,200,255,0.7) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.9) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(100,220,255,0.5) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px),
-    radial-gradient(circle, rgba(100,200,255,0.8) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
-    radial-gradient(circle, rgba(100,220,255,0.7) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
-    radial-gradient(circle, rgba(100,200,255,0.6) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px);
-  background-position:
-    /* Right-center cluster near globe */
-    530px 55px,
-    620px 35px,
-    680px 90px,
-    750px 45px,
-    810px 70px,
-    870px 25px,
-    900px 110px,
-    940px 80px,
-    580px 130px,
-    650px 155px,
-    720px 115px,
-    800px 140px,
-    860px 160px,
-    920px 130px,
-    960px 55px,
-    /* Upper area */
-    490px 20px,
-    560px 170px,
-    700px 185px,
-    770px 170px,
-    830px 185px,
-    880px 195px,
-    /* Left sparse */
-    80px 120px,
-    140px 200px,
-    50px 300px,
-    180px 350px,
-    100px 420px,
-    /* Lower area */
-    600px 420px,
-    680px 440px,
-    750px 380px,
-    820px 410px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='100%25' height='100%25' preserveAspectRatio='none'%3E%3Cpath d='M15 20 L28 12 M28 12 L45 25 M45 25 L62 15 M62 15 L75 22 M75 22 L88 10 M88 10 L92 28' stroke='rgba(0, 240, 255, 0.16)' stroke-width='0.15' fill='none' /%3E%3Cpath d='M10 48 L22 38 M22 38 L32 58 M32 58 L48 48 M48 48 L58 62 M58 62 L72 50 M72 50 L82 60 M82 60 L95 48' stroke='rgba(0, 240, 255, 0.16)' stroke-width='0.15' fill='none' /%3E%3Cpath d='M5 75 L18 85 M18 85 L30 78 M30 78 L42 90 M42 90 L55 82 M55 82 L68 88 M68 88 L80 78 M80 78 L92 85' stroke='rgba(0, 240, 255, 0.14)' stroke-width='0.15' fill='none' /%3E%3Cpath d='M15 20 L10 48 M28 12 L22 38 M45 25 L48 48 M62 15 L58 62 M75 22 L72 50 M88 10 L82 60 M92 28 L95 48' stroke='rgba(0, 240, 255, 0.14)' stroke-width='0.12' fill='none' /%3E%3Cpath d='M10 48 L5 75 M22 38 L18 85 M32 58 L30 78 M48 48 L42 90 M58 62 L55 82 M72 50 L68 88 M82 60 L80 78 M95 48 L92 85' stroke='rgba(0, 240, 255, 0.14)' stroke-width='0.12' fill='none' /%3E%3Cpath d='M28 12 L32 58 M45 25 L58 62 M62 15 L72 50 M75 22 L82 60' stroke='rgba(0, 240, 255, 0.1)' stroke-width='0.1' fill='none' /%3E%3Cpath d='M22 38 L30 78 M48 48 L55 82 M58 62 L68 88 M72 50 L80 78' stroke='rgba(0, 240, 255, 0.1)' stroke-width='0.1' fill='none' /%3E%3Ccircle cx='15' cy='20' r='0.6' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='15' cy='20' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='28' cy='12' r='0.8' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='28' cy='12' r='0.4' fill='%23ffffff' /%3E%3Ccircle cx='45' cy='25' r='0.7' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='45' cy='25' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='62' cy='15' r='0.7' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='62' cy='15' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='75' cy='22' r='0.8' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='75' cy='22' r='0.4' fill='%23ffffff' /%3E%3Ccircle cx='88' cy='10' r='0.6' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='88' cy='10' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='92' cy='28' r='0.7' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='92' cy='28' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='10' cy='48' r='0.7' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='10' cy='48' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='22' cy='38' r='0.8' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='22' cy='38' r='0.4' fill='%23ffffff' /%3E%3Ccircle cx='32' cy='58' r='0.7' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='32' cy='58' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='48' cy='48' r='0.9' fill='%2300f0ff' opacity='0.9' /%3E%3Ccircle cx='48' cy='48' r='0.4' fill='%23ffffff' /%3E%3Ccircle cx='58' cy='62' r='0.8' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='58' cy='62' r='0.4' fill='%23ffffff' /%3E%3Ccircle cx='72' cy='50' r='0.8' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='72' cy='50' r='0.4' fill='%23ffffff' /%3E%3Ccircle cx='82' cy='60' r='0.7' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='82' cy='60' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='95' cy='48' r='0.7' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='95' cy='48' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='5' cy='75' r='0.6' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='5' cy='75' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='18' cy='85' r='0.8' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='18' cy='85' r='0.4' fill='%23ffffff' /%3E%3Ccircle cx='30' cy='78' r='0.7' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='30' cy='78' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='42' cy='90' r='0.8' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='42' cy='90' r='0.4' fill='%23ffffff' /%3E%3Ccircle cx='55' cy='82' r='0.7' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='55' cy='82' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='68' cy='88' r='0.7' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='68' cy='88' r='0.3' fill='%23ffffff' /%3E%3Ccircle cx='80' cy='78' r='0.8' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='80' cy='78' r='0.4' fill='%23ffffff' /%3E%3Ccircle cx='92' cy='85' r='0.7' fill='%2300f0ff' opacity='0.85' /%3E%3Ccircle cx='92' cy='85' r='0.3' fill='%23ffffff' /%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-size: 3px 3px;
-  pointer-events: none;
+  background-size: 100% 100%;
 }
 
 
