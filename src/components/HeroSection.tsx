@@ -63,6 +63,7 @@ export default function HeroSection() {
 
             {/* Transparent portrait */}
             <div className={styles.personWrap}>
+              {/* Use unoptimized to prevent Next.js adding background wrapper */}
               <Image
                 src="/hero.png"
                 alt="Anu Reddy B"
@@ -70,6 +71,7 @@ export default function HeroSection() {
                 height={1024}
                 className={styles.personImg}
                 priority
+                unoptimized
               />
             </div>
 
