@@ -68,7 +68,7 @@ export default function HeroSection() {
                 src="/hero.png"
                 alt="Anu Reddy B"
                 width={576}
-                height={1024}
+                height={479}
                 className={styles.personImg}
                 priority
                 unoptimized

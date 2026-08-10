@@ -250,9 +250,9 @@
 }
 
 .personImg {
-  /* Natural width, fixed height — no object-fit box */
+  /* Head + chest only — natural width, fixed height */
   width: auto !important;
-  height: 520px !important;
+  height: 480px !important;
   max-width: none !important;
   background: transparent;
   filter:
