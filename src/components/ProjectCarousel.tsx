@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Project, projectsData } from '@/data/projectsData';
 import ProjectCard from './ProjectCard';
 import styles from './ProjectCarousel.module.css';
@@ -14,27 +14,12 @@ export default function ProjectCarousel({
   onSelectProject,
   isPausedExternal = false,
 }: ProjectCarouselProps) {
-  const [isHoveredOrTouched, setIsHoveredOrTouched] = useState(false);
-
-  // When external pause (modal) is dismissed, ensure hover/touch is reset so scroll resumes immediately
-  useEffect(() => {
-    if (!isPausedExternal) {
-      setIsHoveredOrTouched(false);
-    }
-  }, [isPausedExternal]);
-
-  const isPaused = isHoveredOrTouched || isPausedExternal;
-
   // Duplicate data array twice to guarantee a seamless 50% infinite translation loop
   const duplicatedProjects = [...projectsData, ...projectsData];
 
   return (
     <div
-      className={`${styles.carouselWrapper} ${isPaused ? styles.paused : ''}`}
-      onMouseEnter={() => setIsHoveredOrTouched(true)}
-      onMouseLeave={() => setIsHoveredOrTouched(false)}
-      onTouchStart={() => setIsHoveredOrTouched(true)}
-      onTouchEnd={() => setIsHoveredOrTouched(false)}
+      className={`${styles.carouselWrapper} ${isPausedExternal ? styles.paused : ''}`}
       aria-roledescription="carousel"
       aria-label="Continuous Projects Carousel"
     >
@@ -44,10 +29,7 @@ export default function ProjectCarousel({
             <ProjectCard
               key={`${project.id}-${index}`}
               project={project}
-              onSelect={(proj) => {
-                setIsHoveredOrTouched(false);
-                onSelectProject(proj);
-              }}
+              onSelect={onSelectProject}
             />
           ))}
         </div>

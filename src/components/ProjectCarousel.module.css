@@ -23,12 +23,8 @@
 .trackContainer {
   display: flex;
   width: max-content;
-  cursor: grab;
+  cursor: default;
   user-select: none;
-}
-
-.trackContainer:active {
-  cursor: grabbing;
 }
 
 .marqueeTrack {
@@ -48,8 +44,7 @@
   }
 }
 
-/* Pause/Slow on hover or when paused class is active */
-.carouselWrapper:hover .marqueeTrack,
+/* Only pause when a card is clicked and modal is active */
 .carouselWrapper.paused .marqueeTrack,
 .paused .marqueeTrack {
   animation-play-state: paused !important;
