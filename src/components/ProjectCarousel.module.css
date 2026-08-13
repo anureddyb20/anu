@@ -50,8 +50,9 @@
 
 /* Pause/Slow on hover or when paused class is active */
 .carouselWrapper:hover .marqueeTrack,
+.carouselWrapper.paused .marqueeTrack,
 .paused .marqueeTrack {
-  animation-play-state: paused;
+  animation-play-state: paused !important;
 }
 
 /* Reduced motion support */
