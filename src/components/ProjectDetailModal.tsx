@@ -17,9 +17,12 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
   useEffect(() => {
     if (!project) return;
 
-    // Lock body scroll
-    const originalOverflow = document.body.style.overflow;
+    // Lock page background scroll (both body and html root)
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
 
     // Handle ESC key
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -31,7 +34,8 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      document.body.style.overflow = originalOverflow;
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [project, onClose]);

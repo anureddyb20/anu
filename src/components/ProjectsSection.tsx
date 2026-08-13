@@ -31,7 +31,10 @@ export default function ProjectsSection() {
       </div>
 
       {/* Cinematic Right-to-Left Infinite Carousel */}
-      <ProjectCarousel onSelectProject={(project) => setSelectedProject(project)} />
+      <ProjectCarousel
+        isPausedExternal={Boolean(selectedProject)}
+        onSelectProject={(project) => setSelectedProject(project)}
+      />
 
       {/* Interactive Detail Modal */}
       <ProjectDetailModal
