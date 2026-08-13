@@ -1,0 +1,91 @@
+.carouselWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 1.5rem 0 3rem 0;
+  /* Cinematic edge gradient masks */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+}
+
+.trackContainer {
+  display: flex;
+  width: max-content;
+  cursor: grab;
+  user-select: none;
+}
+
+.trackContainer:active {
+  cursor: grabbing;
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem 1rem;
+  will-change: transform;
+  animation: marqueeRightToLeft 42s linear infinite;
+}
+
+@keyframes marqueeRightToLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause/Slow on hover or when paused class is active */
+.carouselWrapper:hover .marqueeTrack,
+.paused .marqueeTrack {
+  animation-play-state: paused;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack {
+    animation: none;
+    overflow-x: auto;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .marqueeTrack {
+    gap: 1.25rem;
+    animation-duration: 32s;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .carouselWrapper {
+    padding: 1rem 0 2rem 0;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 3%,
+      black 97%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 3%,
+      black 97%,
+      transparent 100%
+    );
+  }
+}
