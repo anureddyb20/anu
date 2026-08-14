@@ -5,7 +5,6 @@ import styles from './SkillsSection.module.css';
 
 export interface DomainData {
   id: string;
-  counter: string;
   name: string;
   subtitle: string;
   description: string;
@@ -15,23 +14,13 @@ export interface DomainData {
 const DOMAINS: DomainData[] = [
   {
     id: 'frontend',
-    counter: '01 / 04',
     name: 'FRONTEND',
     subtitle: 'Web Interfaces',
     description: 'Building responsive and interactive web experiences.',
     skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'Tailwind CSS']
   },
   {
-    id: 'backend',
-    counter: '02 / 04',
-    name: 'BACKEND',
-    subtitle: 'API & Data',
-    description: 'Developing APIs, databases and connected application systems.',
-    skills: ['Node.js', 'Express.js', 'REST APIs', 'Supabase', 'PostgreSQL', 'Firebase']
-  },
-  {
     id: 'hardware',
-    counter: '03 / 04',
     name: 'HARDWARE & IoT',
     subtitle: 'Embedded Systems',
     description: 'Building embedded systems and connected hardware solutions.',
@@ -39,28 +28,33 @@ const DOMAINS: DomainData[] = [
   },
   {
     id: 'tools',
-    counter: '04 / 04',
     name: 'TOOLS & DESIGN',
     subtitle: 'Workflow & UI',
     description: 'Designing, deploying and managing modern digital products.',
     skills: ['Git', 'GitHub', 'Vercel', 'Figma', 'Canva', 'UI/UX Design']
+  },
+  {
+    id: 'backend',
+    name: 'BACKEND',
+    subtitle: 'API & Data',
+    description: 'Developing APIs, databases and connected application systems.',
+    skills: ['Node.js', 'Express.js', 'REST APIs', 'Supabase', 'PostgreSQL', 'Firebase']
   }
 ];
 
 export default function SkillsSection() {
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const [selectedId, setSelectedId] = useState<string>('frontend');
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [orbitAngle, setOrbitAngle] = useState<number>(0);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
-  const activeDomain = DOMAINS.find((d) => d.id === selectedId) || DOMAINS[0];
+  const activeDomain = DOMAINS.find((d) => d.id === selectedId) || null;
 
-  // Screen size check for mobile orbit scaling
+  // Responsive screen size listener
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 800);
+      setIsMobile(window.innerWidth <= 768);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -84,22 +78,62 @@ export default function SkillsSection() {
     return () => cancelAnimationFrame(animId);
   }, [isHovered]);
 
-  const handleDomainSelect = (id: string) => {
+  const handleDomainClick = (id: string) => {
     setSelectedId(id);
-    if (!isExpanded) {
-      setIsExpanded(true);
-    }
   };
 
-  // Positions for Stage 1 initial circular ecosystem
-  const getInitialPosition = (index: number) => {
-    const radius = isMobile ? 140 : 190;
-    const angles = [-90, 0, 90, 180]; // Top, Right, Bottom, Left
-    const rad = (angles[index % 4] * Math.PI) / 180;
-    return {
-      x: Math.cos(rad) * radius,
-      y: Math.sin(rad) * radius
-    };
+  const handleResetEcosystem = () => {
+    setSelectedId(null);
+    setHoveredSkill(null);
+  };
+
+  // Get physical 2D coordinates for category circles across both states
+  const getCirclePosition = (domainId: string) => {
+    // ── STATE 1: Initial Balanced Ecosystem (selectedId === null) ──
+    if (selectedId === null) {
+      if (isMobile) {
+        const initialMobileMap: Record<string, { x: number; y: number }> = {
+          frontend: { x: 0, y: -140 },
+          hardware: { x: 130, y: 30 },
+          tools: { x: 0, y: 140 },
+          backend: { x: -130, y: 30 }
+        };
+        return initialMobileMap[domainId] || { x: 0, y: 0 };
+      }
+      const initialDesktopMap: Record<string, { x: number; y: number }> = {
+        frontend: { x: 0, y: -190 },
+        hardware: { x: 210, y: 30 },
+        tools: { x: 0, y: 190 },
+        backend: { x: -210, y: 30 }
+      };
+      return initialDesktopMap[domainId] || { x: 0, y: 0 };
+    }
+
+    // ── STATE 2: Category Selected (selectedId !== null) ──
+    // Selected Circle: Travels physically to RIGHT SIDE
+    if (domainId === selectedId) {
+      return isMobile ? { x: 0, y: 100 } : { x: 250, y: 0 };
+    }
+
+    // Inactive Circles: Remain on LEFT SIDE as CIRCULAR NODES
+    const inactiveDomains = DOMAINS.filter((d) => d.id !== selectedId);
+    const inactiveIndex = inactiveDomains.findIndex((d) => d.id === domainId);
+
+    if (isMobile) {
+      const mobileLeftMap = [
+        { x: -115, y: -175 },
+        { x: 0, y: -175 },
+        { x: 115, y: -175 }
+      ];
+      return mobileLeftMap[inactiveIndex % 3];
+    }
+
+    const desktopLeftMap = [
+      { x: -280, y: -145 },
+      { x: -330, y: 0 },
+      { x: -280, y: 145 }
+    ];
+    return desktopLeftMap[inactiveIndex % 3];
   };
 
   return (
@@ -108,178 +142,155 @@ export default function SkillsSection() {
       <div className={styles.headerContainer}>
         <div className={styles.sectionBadge}>
           <span className={styles.badgeDot}></span>
-          Technical Ecosystem
+          Pure Circular Ecosystem
         </div>
         <h2 className={styles.heading}>
-          EXPLORE MY <span className={styles.highlight}>TECHNICAL ECOSYSTEM</span>
+          TECHNICAL <span className={styles.highlight}>ECOSYSTEM EXPLORER</span>
         </h2>
         <p className={styles.subtitle}>
-          Select a domain to explore the technologies I use to build.
+          {selectedId === null 
+            ? 'Select a domain circle to expand its interactive technology orbit.'
+            : 'Exploring selected domain. Click any circular node on the left to switch or reset below.'}
         </p>
       </div>
 
-      {/* ============================================================
-          STAGE 1: INITIAL CENTRALISED ECOSYSTEM VIEW
-         ============================================================ */}
-      {!isExpanded ? (
-        <div className={styles.initialEcosystem}>
-          {/* Central Instruction Node */}
-          <div className={styles.centerPromptNode}>
-            <span className={styles.centerPromptText}>Select a domain to explore</span>
-            <svg 
-              className={styles.centerPromptIcon} 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            >
-              <polyline points="7 13 12 18 17 13"></polyline>
-              <polyline points="7 6 12 11 17 6"></polyline>
-            </svg>
-          </div>
-
-          {/* 4 Circular Domain Nodes */}
-          {DOMAINS.map((domain, idx) => {
-            const pos = getInitialPosition(idx);
-            return (
-              <button
-                key={domain.id}
-                className={styles.initialDomainNode}
-                style={{
-                  transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`
-                }}
-                onClick={() => handleDomainSelect(domain.id)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleDomainSelect(domain.id);
-                  }
-                }}
-                tabIndex={0}
-                aria-label={`Explore domain: ${domain.name}`}
-                role="button"
-              >
-                <h3 className={styles.initialDomainTitle}>{domain.name}</h3>
-                <span className={styles.initialDomainExplore}>Click to explore</span>
-              </button>
-            );
-          })}
-        </div>
-      ) : (
-        /* ============================================================
-            STAGE 2: SPLIT-SCREEN EXPLORER VIEW
-           ============================================================ */
-        <div className={styles.explorerContainer}>
-          
-          {/* ── LEFT SIDE: CATEGORY NAVIGATOR ── */}
-          <div className={styles.leftNavigator}>
-            <span className={styles.navigatorHeading}>Select Domain</span>
-            {DOMAINS.map((domain) => {
-              const isActive = domain.id === selectedId;
-              return (
-                <button
-                  key={domain.id}
-                  className={`${styles.categoryNavItem} ${isActive ? styles.categoryNavItemActive : ''}`}
-                  onClick={() => handleDomainSelect(domain.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      handleDomainSelect(domain.id);
-                    }
-                  }}
-                  tabIndex={0}
-                  aria-selected={isActive}
-                  aria-label={`Select ${domain.name}`}
-                  role="button"
-                >
-                  <div className={styles.categoryNodeCircle}>
-                    {domain.counter.split(' ')[0]}
-                  </div>
-                  <div className={styles.categoryNavText}>
-                    <span className={styles.categoryNavTitle}>{domain.name}</span>
-                    <span className={styles.categoryNavSubtitle}>{domain.subtitle}</span>
-                  </div>
-                  {isActive && <span className={styles.activeBadge}>ACTIVE</span>}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* ── CONNECTING ANIMATED SIGNAL PATH (Desktop Only) ── */}
-          {!isMobile && (
-            <svg className={styles.connectorLineContainer} width="100%" height="100%">
-              <path
-                d="M 320 280 Q 400 280, 520 280"
-                fill="none"
-                stroke="rgba(255, 255, 255, 0.15)"
-                strokeWidth="1.5"
-                className={styles.pulsePath}
-              />
-            </svg>
-          )}
-
-          {/* ── RIGHT SIDE: SELECTED CATEGORY TECHNOLOGY ORBIT ── */}
-          <div
-            className={styles.rightOrbitSystem}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => {
-              setIsHovered(false);
-              setHoveredSkill(null);
-            }}
-          >
-            {/* Orbit Path Ring */}
-            <div className={styles.orbitPathRing}></div>
-
-            {/* Central Selected Domain Node */}
-            <div className={styles.centerDomainNode}>
-              <span className={styles.domainCounter}>{activeDomain.counter}</span>
-              <h3 className={styles.domainName}>{activeDomain.name}</h3>
-              <span className={styles.domainSubtitle}>{activeDomain.subtitle}</span>
-              <p className={styles.domainDesc}>{activeDomain.description}</p>
-            </div>
-
-            {/* Orbiting Technology Nodes */}
-            {activeDomain.skills.map((skill, idx) => {
-              const total = activeDomain.skills.length;
-              const radius = isMobile ? 135 : 195;
-              const baseAngle = (idx * 360) / total;
-              const currentAngle = (baseAngle + orbitAngle) % 360;
-              const rad = (currentAngle * Math.PI) / 180;
-              
-              const x = Math.cos(rad) * radius;
-              const y = Math.sin(rad) * radius;
-              const isSkillHovered = hoveredSkill === skill;
-
-              return (
-                <div
-                  key={skill}
-                  className={styles.skillNode}
-                  style={{
-                    transform: `translate3d(${x}px, ${y}px, 0)`
-                  }}
-                  onMouseEnter={() => setHoveredSkill(skill)}
-                  onMouseLeave={() => setHoveredSkill(null)}
-                >
-                  <div
-                    className={`${styles.skillPill} ${isSkillHovered ? styles.skillPillActive : ''}`}
-                    tabIndex={0}
-                    aria-label={`Technology: ${skill}`}
-                  >
-                    <span className={styles.skillDot}></span>
-                    <span>{skill}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
+      {/* ── Reset Ecosystem Control (visible when a category is expanded) ── */}
+      {selectedId !== null && (
+        <button
+          className={styles.resetControl}
+          onClick={handleResetEcosystem}
+          aria-label="Reset to full circular ecosystem"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          Reset Ecosystem
+        </button>
       )}
+
+      {/* ── PURE CIRCULAR STAGE CONTAINER ── */}
+      <div 
+        className={styles.ecosystemStage}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => {
+          setIsHovered(false);
+          setHoveredSkill(null);
+        }}
+      >
+        {/* Central Prompt Node (State 1 Initial Ecosystem) */}
+        <div 
+          className={styles.centerPromptNode}
+          style={{
+            opacity: selectedId === null ? 1 : 0,
+            pointerEvents: selectedId === null ? 'auto' : 'none',
+            transform: selectedId === null ? 'translate(-50%, -50%) scale(1)' : 'translate(-50%, -50%) scale(0.5)'
+          }}
+        >
+          <span className={styles.centerPromptText}>Select a domain to explore</span>
+          <svg 
+            className={styles.centerPromptIcon} 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="20" 
+            height="20" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <polyline points="7 13 12 18 17 13"></polyline>
+            <polyline points="7 6 12 11 17 6"></polyline>
+          </svg>
+        </div>
+
+        {/* Orbit Path Ring for Expanded Right System (State 2) */}
+        {selectedId !== null && (
+          <div 
+            className={styles.orbitRingPath}
+            style={{
+              transform: isMobile 
+                ? 'translate(-50%, calc(-50% + 100px))' 
+                : 'translate(calc(-50% + 250px), -50%)'
+            }}
+          ></div>
+        )}
+
+        {/* ── 100% PURE CIRCULAR DOMAIN NODES ── */}
+        {DOMAINS.map((domain) => {
+          const isSelected = domain.id === selectedId;
+          const pos = getCirclePosition(domain.id);
+
+          return (
+            <button
+              key={domain.id}
+              className={`${styles.domainCircle} ${isSelected ? styles.domainCircleActive : styles.domainCircleInactive}`}
+              style={{
+                transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`
+              }}
+              onClick={() => handleDomainClick(domain.id)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleDomainClick(domain.id);
+                }
+              }}
+              tabIndex={0}
+              aria-selected={isSelected}
+              aria-label={`Domain: ${domain.name}`}
+              role="button"
+            >
+              <h3 className={styles.domainTitle}>{domain.name}</h3>
+              
+              {isSelected ? (
+                <>
+                  <span className={styles.domainSubtitle}>{domain.subtitle}</span>
+                  <p className={styles.domainDesc}>{domain.description}</p>
+                </>
+              ) : (
+                <span className={styles.domainExploreTag}>Click to explore</span>
+              )}
+            </button>
+          );
+        })}
+
+        {/* ── EMERGING ORBITING SKILL NODES (Active Category) ── */}
+        {activeDomain && activeDomain.skills.map((skill, idx) => {
+          const total = activeDomain.skills.length;
+          const orbitRadius = isMobile ? 135 : 195;
+          const baseAngle = (idx * 360) / total;
+          const currentAngle = (baseAngle + orbitAngle) % 360;
+          const rad = (currentAngle * Math.PI) / 180;
+          
+          // Right side orbit center offset
+          const centerOffset = isMobile ? { x: 0, y: 100 } : { x: 250, y: 0 };
+          const x = centerOffset.x + Math.cos(rad) * orbitRadius;
+          const y = centerOffset.y + Math.sin(rad) * orbitRadius;
+          const isSkillHovered = hoveredSkill === skill;
+
+          return (
+            <div
+              key={skill}
+              className={styles.skillNode}
+              style={{
+                transform: `translate3d(${x}px, ${y}px, 0)`
+              }}
+              onMouseEnter={() => setHoveredSkill(skill)}
+              onMouseLeave={() => setHoveredSkill(null)}
+            >
+              <div
+                className={`${styles.skillPill} ${isSkillHovered ? styles.skillPillActive : ''}`}
+                tabIndex={0}
+                aria-label={`Technology: ${skill}`}
+              >
+                <span className={styles.skillDot}></span>
+                <span>{skill}</span>
+              </div>
+            </div>
+          );
+        })}
+
+      </div>
     </section>
   );
 }

@@ -1,5 +1,5 @@
 /* ============================================================
-   SKILLS SECTION — TECHNICAL ECOSYSTEM EXPLORER
+   SKILLS SECTION — PURE CIRCULAR ECOSYSTEM EXPLORER
    ============================================================ */
 
 .skills {
@@ -67,28 +67,61 @@
   margin: 0;
 }
 
-/* ============================================================
-   STAGE 1: INITIAL CENTRALISED ECOSYSTEM VIEW
-   ============================================================ */
-.initialEcosystem {
+/* ── RESET / EXPLORE ALL CONTROL ── */
+.resetControl {
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  z-index: 25;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.1rem;
+  background: rgba(17, 17, 17, 0.9);
+  border: 1px solid #292929;
+  border-radius: 30px;
+  color: #f5f5f5;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.resetControl:hover,
+.resetControl:focus-visible {
+  border-color: #ffffff;
+  background: #171717;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  transform: translateX(-3px);
+}
+
+/* ── PURE CIRCULAR STAGE CONTAINER ── */
+.ecosystemStage {
   position: relative;
   width: 100%;
-  max-width: 800px;
-  height: 520px;
+  max-width: 1050px;
+  height: 600px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 0.6s ease forwards;
+  user-select: none;
 }
 
+/* Central Prompt Node (State 1) */
 .centerPromptNode {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 180px;
-  height: 180px;
+  width: 190px;
+  height: 190px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #181818 0%, #101010 100%);
   border: 1px dashed rgba(255, 255, 255, 0.2);
@@ -96,10 +129,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 1.2rem;
   text-align: center;
   z-index: 2;
   box-shadow: 0 0 35px rgba(0, 0, 0, 0.8);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .centerPromptText {
@@ -122,44 +156,65 @@
   50%      { transform: translateY(-4px); }
 }
 
-.initialDomainNode {
+/* ── 100% PURE CIRCULAR DOMAIN NODES ── */
+.domainCircle {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 150px;
-  height: 150px;
-  margin-top: -75px;
-  margin-left: -75px;
   border-radius: 50%;
-  background: rgba(17, 17, 17, 0.9);
-  border: 1px solid #292929;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
   text-align: center;
   cursor: pointer;
-  z-index: 5;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-              border-color 0.3s ease,
-              box-shadow 0.3s ease,
-              background 0.3s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   outline: none;
+  /* Smooth physical travelling transition */
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+              width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+              height 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+              margin-top 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+              margin-left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.4s ease,
+              background 0.4s ease,
+              box-shadow 0.4s ease;
 }
 
-.initialDomainNode:hover,
-.initialDomainNode:focus-visible {
+/* Initial / Unselected Circle (State 1 & Left Ecosystem) */
+.domainCircleInactive {
+  width: 145px;
+  height: 145px;
+  margin-top: -72.5px;
+  margin-left: -72.5px;
+  background: rgba(17, 17, 17, 0.9);
+  border: 1px solid #292929;
+  z-index: 6;
+}
+
+.domainCircleInactive:hover,
+.domainCircleInactive:focus-visible {
   border-color: #ffffff;
   background: #171717;
   box-shadow: 0 0 35px rgba(255, 255, 255, 0.15);
-  transform: scale(1.1) !important;
+  transform: scale(1.08) !important;
 }
 
-.initialDomainTitle {
-  font-size: 0.88rem;
+/* Expanded Active Circle on RIGHT (State 2) */
+.domainCircleActive {
+  width: 240px;
+  height: 240px;
+  margin-top: -120px;
+  margin-left: -120px;
+  background: radial-gradient(circle at 35% 35%, #1c1c1c 0%, #111111 75%, #080808 100%);
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 0 60px rgba(255, 255, 255, 0.18), inset 0 0 30px rgba(255, 255, 255, 0.05);
+  z-index: 12;
+}
+
+.domainTitle {
+  font-size: 0.9rem;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: 0.05em;
@@ -168,177 +223,35 @@
   line-height: 1.2;
 }
 
-.initialDomainExplore {
-  font-size: 0.7rem;
+.domainCircleActive .domainTitle {
+  font-size: 1.3rem;
+}
+
+.domainSubtitle {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #a0a0a0;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+}
+
+.domainDesc {
+  font-size: 0.75rem;
+  color: #666666;
+  margin-top: 0.6rem;
+  line-height: 1.4;
+  max-width: 180px;
+}
+
+.domainExploreTag {
+  font-size: 0.68rem;
   color: #a0a0a0;
   margin-top: 0.35rem;
   font-weight: 500;
 }
 
-/* ============================================================
-   STAGE 2: SPLIT-SCREEN EXPLORER VIEW
-   ============================================================ */
-.explorerContainer {
-  position: relative;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 2rem;
-  align-items: center;
-  min-height: 560px;
-  animation: fadeIn 0.6s ease forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── LEFT SIDE: CATEGORY NAVIGATOR ── */
-.leftNavigator {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  position: relative;
-  z-index: 10;
-}
-
-.navigatorHeading {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #666666;
-  margin-bottom: 0.2rem;
-  padding-left: 0.5rem;
-}
-
-.categoryNavItem {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.2rem;
-  background: rgba(17, 17, 17, 0.7);
-  border: 1px solid #292929;
-  border-radius: 18px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-  outline: none;
-  text-align: left;
-  width: 100%;
-}
-
-.categoryNavItem:hover,
-.categoryNavItem:focus-visible {
-  border-color: #4a4a4a;
-  background: rgba(23, 23, 23, 0.95);
-  transform: translateX(4px);
-}
-
-.categoryNavItemActive {
-  background: #171717;
-  border-color: #ffffff;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
-  transform: translateX(6px);
-}
-
-.categoryNodeCircle {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #111111;
-  border: 1px solid #333333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #a0a0a0;
-  flex-shrink: 0;
-  transition: all 0.3s ease;
-}
-
-.categoryNavItemActive .categoryNodeCircle {
-  background: #ffffff;
-  color: #000000;
-  border-color: #ffffff;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-}
-
-.categoryNavText {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  flex-grow: 1;
-}
-
-.categoryNavTitle {
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: #a0a0a0;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
-}
-
-.categoryNavItemActive .categoryNavTitle,
-.categoryNavItem:hover .categoryNavTitle {
-  color: #ffffff;
-}
-
-.categoryNavSubtitle {
-  font-size: 0.75rem;
-  color: #666666;
-}
-
-.activeBadge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #ffffff;
-  padding: 0.2rem 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* ── CONNECTING SIGNAL PATH ── */
-.connectorLineContainer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.pulsePath {
-  stroke: rgba(255, 255, 255, 0.25);
-  stroke-dasharray: 6 6;
-  animation: strokePulse 30s linear infinite;
-}
-
-@keyframes strokePulse {
-  to { stroke-dashoffset: -360; }
-}
-
-/* ── RIGHT SIDE: SELECTED CATEGORY ORBIT ── */
-.rightOrbitSystem {
-  position: relative;
-  width: 100%;
-  height: 560px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  z-index: 5;
-}
-
-/* Orbit Path Circle */
-.orbitPathRing {
+/* ── RIGHT TECHNOLOGY ORBIT RINGS & NODES ── */
+.orbitRingPath {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -349,9 +262,10 @@
   border: 1px dashed rgba(255, 255, 255, 0.15);
   pointer-events: none;
   z-index: 1;
+  animation: fadeIn 0.6s ease forwards;
 }
 
-.orbitPathRing::before {
+.orbitRingPath::before {
   content: '';
   position: absolute;
   top: -4px;
@@ -363,72 +277,6 @@
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
-/* Center Selected Domain Node */
-.centerDomainNode {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 240px;
-  height: 240px;
-  margin-top: -120px;
-  margin-left: -120px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #1c1c1c 0%, #111111 75%, #080808 100%);
-  border: 1.5px solid #555555;
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.1), inset 0 0 30px rgba(255, 255, 255, 0.04);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  text-align: center;
-  z-index: 10;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-.centerDomainNode:hover {
-  border-color: #ffffff;
-  box-shadow: 0 0 65px rgba(255, 255, 255, 0.18), inset 0 0 40px rgba(255, 255, 255, 0.06);
-}
-
-.domainCounter {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #666666;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.2rem;
-}
-
-.domainName {
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.domainSubtitle {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #a0a0a0;
-  margin-top: 0.25rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.domainDesc {
-  font-size: 0.76rem;
-  color: #666666;
-  margin-top: 0.6rem;
-  line-height: 1.4;
-  max-width: 180px;
-}
-
-/* Orbiting Skill Node */
 .skillNode {
   position: absolute;
   top: 50%;
@@ -436,7 +284,7 @@
   z-index: 15;
   will-change: transform;
   pointer-events: auto;
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .skillPill {
@@ -486,27 +334,29 @@
 /* ============================================================
    RESPONSIVE STYLES
    ============================================================ */
-@media (max-width: 950px) {
-  .explorerContainer {
-    grid-template-columns: 280px 1fr;
-    gap: 1.5rem;
+@media (max-width: 900px) {
+  .ecosystemStage {
+    height: 540px;
   }
-  .orbitPathRing {
+  .domainCircleInactive {
+    width: 125px;
+    height: 125px;
+    margin-top: -62.5px;
+    margin-left: -62.5px;
+  }
+  .domainCircleActive {
+    width: 200px;
+    height: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+  }
+  .orbitRingPath {
     width: 320px;
     height: 320px;
   }
-  .centerDomainNode {
-    width: 210px;
-    height: 210px;
-    margin-top: -105px;
-    margin-left: -105px;
-  }
-  .domainName {
-    font-size: 1.15rem;
-  }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .skills {
     padding: 4rem 0 5rem 0;
   }
@@ -515,50 +365,46 @@
     font-size: 2.2rem;
   }
 
-  .explorerContainer {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .resetControl {
+    top: 0.5rem;
+    left: 1rem;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.9rem;
   }
 
-  .leftNavigator {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
+  .ecosystemStage {
+    height: 520px;
   }
 
-  .connectorLineContainer {
-    display: none;
+  .domainCircleInactive {
+    width: 110px;
+    height: 110px;
+    margin-top: -55px;
+    margin-left: -55px;
   }
 
-  .rightOrbitSystem {
-    height: 480px;
+  .domainCircleActive {
+    width: 175px;
+    height: 175px;
+    margin-top: -87.5px;
+    margin-left: -87.5px;
   }
 
-  .orbitPathRing {
-    width: 270px;
-    height: 270px;
+  .domainTitle {
+    font-size: 0.78rem;
   }
 
-  .centerDomainNode {
-    width: 180px;
-    height: 180px;
-    margin-top: -90px;
-    margin-left: -90px;
-    padding: 1rem;
-  }
-
-  .domainName {
+  .domainCircleActive .domainTitle {
     font-size: 1.05rem;
   }
 
   .domainSubtitle {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
   }
 
   .domainDesc {
-    font-size: 0.7rem;
-    max-width: 140px;
-    margin-top: 0.35rem;
+    font-size: 0.68rem;
+    max-width: 130px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -567,28 +413,12 @@
   }
 
   .skillPill {
-    font-size: 0.78rem;
-    padding: 0.4rem 0.8rem;
-  }
-}
-
-@media (max-width: 500px) {
-  .leftNavigator {
-    grid-template-columns: 1fr;
-  }
-  
-  .initialEcosystem {
-    height: 460px;
+    font-size: 0.75rem;
+    padding: 0.38rem 0.75rem;
   }
 
-  .initialDomainNode {
-    width: 125px;
-    height: 125px;
-    margin-top: -62px;
-    margin-left: -62px;
-  }
-
-  .initialDomainTitle {
-    font-size: 0.78rem;
+  .orbitRingPath {
+    width: 270px;
+    height: 270px;
   }
 }
