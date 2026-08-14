@@ -257,7 +257,7 @@ export default function SkillsSection() {
         {/* ── EMERGING ORBITING SKILL NODES (Active Category) ── */}
         {activeDomain && activeDomain.skills.map((skill, idx) => {
           const total = activeDomain.skills.length;
-          const orbitRadius = isMobile ? 135 : 195;
+          const orbitRadius = isMobile ? 145 : 215;
           const baseAngle = (idx * 360) / total;
           const currentAngle = (baseAngle + orbitAngle) % 360;
           const rad = (currentAngle * Math.PI) / 180;
@@ -273,7 +273,7 @@ export default function SkillsSection() {
               key={skill}
               className={styles.skillNode}
               style={{
-                transform: `translate3d(${x}px, ${y}px, 0)`
+                transform: `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0)`
               }}
               onMouseEnter={() => setHoveredSkill(skill)}
               onMouseLeave={() => setHoveredSkill(null)}
