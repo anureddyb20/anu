@@ -1,5 +1,5 @@
 /* ============================================================
-   SKILLS SECTION — INTERACTIVE TECHNOLOGY ORBIT SYSTEM
+   SKILLS SECTION — TECHNICAL ECOSYSTEM EXPLORER
    ============================================================ */
 
 .skills {
@@ -13,7 +13,7 @@
 .headerContainer {
   text-align: center;
   max-width: 750px;
-  margin: 0 auto 3.5rem auto;
+  margin: 0 auto 3rem auto;
   padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
@@ -43,7 +43,7 @@
   height: 6px;
   border-radius: 50%;
   background-color: #ffffff;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 .heading {
@@ -67,35 +67,291 @@
   margin: 0;
 }
 
-/* ── ORBIT SYSTEM CONTAINER ── */
-.orbitSystem {
+/* ============================================================
+   STAGE 1: INITIAL CENTRALISED ECOSYSTEM VIEW
+   ============================================================ */
+.initialEcosystem {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  height: 620px;
+  max-width: 800px;
+  height: 520px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  user-select: none;
+  animation: fadeIn 0.6s ease forwards;
 }
 
-/* Outer Orbit Ambient Rings */
-.outerOrbitRing {
+.centerPromptNode {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 440px;
-  height: 440px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  border: 1px dashed rgba(255, 255, 255, 0.12);
-  pointer-events: none;
-  z-index: 1;
-  animation: rotateClockwise 60s linear infinite;
+  background: radial-gradient(circle at 35% 35%, #181818 0%, #101010 100%);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  z-index: 2;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.8);
 }
 
-.outerOrbitRing::before {
+.centerPromptText {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a0a0a0;
+  line-height: 1.4;
+}
+
+.centerPromptIcon {
+  margin-top: 0.5rem;
+  color: #ffffff;
+  animation: bounceSlow 2s ease-in-out infinite;
+}
+
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+.initialDomainNode {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  margin-top: -75px;
+  margin-left: -75px;
+  border-radius: 50%;
+  background: rgba(17, 17, 17, 0.9);
+  border: 1px solid #292929;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              background 0.3s ease;
+  outline: none;
+}
+
+.initialDomainNode:hover,
+.initialDomainNode:focus-visible {
+  border-color: #ffffff;
+  background: #171717;
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.15);
+  transform: scale(1.1) !important;
+}
+
+.initialDomainTitle {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.initialDomainExplore {
+  font-size: 0.7rem;
+  color: #a0a0a0;
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+/* ============================================================
+   STAGE 2: SPLIT-SCREEN EXPLORER VIEW
+   ============================================================ */
+.explorerContainer {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 2rem;
+  align-items: center;
+  min-height: 560px;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── LEFT SIDE: CATEGORY NAVIGATOR ── */
+.leftNavigator {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.navigatorHeading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #666666;
+  margin-bottom: 0.2rem;
+  padding-left: 0.5rem;
+}
+
+.categoryNavItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: rgba(17, 17, 17, 0.7);
+  border: 1px solid #292929;
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  outline: none;
+  text-align: left;
+  width: 100%;
+}
+
+.categoryNavItem:hover,
+.categoryNavItem:focus-visible {
+  border-color: #4a4a4a;
+  background: rgba(23, 23, 23, 0.95);
+  transform: translateX(4px);
+}
+
+.categoryNavItemActive {
+  background: #171717;
+  border-color: #ffffff;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+  transform: translateX(6px);
+}
+
+.categoryNodeCircle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #111111;
+  border: 1px solid #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #a0a0a0;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.categoryNavItemActive .categoryNodeCircle {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+}
+
+.categoryNavText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex-grow: 1;
+}
+
+.categoryNavTitle {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #a0a0a0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.categoryNavItemActive .categoryNavTitle,
+.categoryNavItem:hover .categoryNavTitle {
+  color: #ffffff;
+}
+
+.categoryNavSubtitle {
+  font-size: 0.75rem;
+  color: #666666;
+}
+
+.activeBadge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding: 0.2rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ── CONNECTING SIGNAL PATH ── */
+.connectorLineContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pulsePath {
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-dasharray: 6 6;
+  animation: strokePulse 30s linear infinite;
+}
+
+@keyframes strokePulse {
+  to { stroke-dashoffset: -360; }
+}
+
+/* ── RIGHT SIDE: SELECTED CATEGORY ORBIT ── */
+.rightOrbitSystem {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  z-index: 5;
+}
+
+/* Orbit Path Circle */
+.orbitPathRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 390px;
+  height: 390px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.orbitPathRing::before {
   content: '';
   position: absolute;
   top: -4px;
@@ -107,35 +363,19 @@
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
-.outerOrbitRing::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #a0a0a0;
-}
-
-@keyframes rotateClockwise {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to   { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* ── CENTRAL ACTIVE WHEEL ── */
-.centralWheel {
+/* Center Selected Domain Node */
+.centerDomainNode {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 250px;
-  height: 250px;
-  margin-top: -125px;
-  margin-left: -125px;
+  width: 240px;
+  height: 240px;
+  margin-top: -120px;
+  margin-left: -120px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #1a1a1a 0%, #111111 70%, #0a0a0a 100%);
+  background: radial-gradient(circle at 35% 35%, #1c1c1c 0%, #111111 75%, #080808 100%);
   border: 1.5px solid #555555;
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.08), inset 0 0 30px rgba(255, 255, 255, 0.03);
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.1), inset 0 0 30px rgba(255, 255, 255, 0.04);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -143,46 +383,52 @@
   padding: 1.5rem;
   text-align: center;
   z-index: 10;
-  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.4s ease,
-              border-color 0.4s ease;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-.centralWheel:hover {
+.centerDomainNode:hover {
   border-color: #ffffff;
-  box-shadow: 0 0 65px rgba(255, 255, 255, 0.16), inset 0 0 40px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 65px rgba(255, 255, 255, 0.18), inset 0 0 40px rgba(255, 255, 255, 0.06);
 }
 
-.categoryTitle {
-  font-size: 1.35rem;
+.domainCounter {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #666666;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.2rem;
+}
+
+.domainName {
+  font-size: 1.3rem;
   font-weight: 800;
   color: #ffffff;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   margin: 0;
   line-height: 1.2;
 }
 
-.categorySubtitle {
+.domainSubtitle {
   font-size: 0.78rem;
   font-weight: 600;
   color: #a0a0a0;
-  letter-spacing: 0.04em;
-  margin-top: 0.35rem;
+  margin-top: 0.25rem;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.categoryDesc {
-  font-size: 0.78rem;
+.domainDesc {
+  font-size: 0.76rem;
   color: #666666;
-  margin-top: 0.75rem;
+  margin-top: 0.6rem;
   line-height: 1.4;
-  max-width: 190px;
+  max-width: 180px;
 }
 
-/* ── ORBITING SKILL NODES ── */
+/* Orbiting Skill Node */
 .skillNode {
   position: absolute;
   top: 50%;
@@ -190,13 +436,14 @@
   z-index: 15;
   will-change: transform;
   pointer-events: auto;
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .skillPill {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
+  gap: 0.45rem;
+  padding: 0.5rem 1.05rem;
   background: #111111;
   border: 1px solid #333333;
   border-radius: 30px;
@@ -204,7 +451,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
   white-space: nowrap;
   transition: transform 0.25s ease,
               background 0.25s ease,
@@ -220,7 +467,7 @@
   color: #000000;
   border-color: #ffffff;
   transform: scale(1.12);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.45);
 }
 
 .skillDot {
@@ -236,92 +483,30 @@
   background: #000000;
 }
 
-/* ── SATELLITE CATEGORY WHEELS ── */
-.satelliteWheel {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 140px;
-  height: 140px;
-  margin-top: -70px;
-  margin-left: -70px;
-  border-radius: 50%;
-  background: rgba(17, 17, 17, 0.85);
-  border: 1px solid #292929;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  text-align: center;
-  cursor: pointer;
-  z-index: 8;
-  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
-              border-color 0.3s ease,
-              background 0.3s ease,
-              box-shadow 0.3s ease;
-  outline: none;
-}
-
-.satelliteWheel:hover,
-.satelliteWheel:focus-visible {
-  border-color: #4a4a4a;
-  background: rgba(23, 23, 23, 0.95);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.08);
-  transform: scale(1.08);
-}
-
-.satelliteTitle {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #a0a0a0;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  line-height: 1.2;
-  transition: color 0.3s ease;
-}
-
-.satelliteWheel:hover .satelliteTitle,
-.satelliteWheel:focus-visible .satelliteTitle {
-  color: #ffffff;
-}
-
-.satelliteIndicator {
-  margin-top: 0.4rem;
-  font-size: 0.68rem;
-  color: #666666;
-  font-weight: 500;
-}
-
-/* ── RESPONSIVE STYLES ── */
-@media (max-width: 900px) {
-  .orbitSystem {
-    height: 580px;
+/* ============================================================
+   RESPONSIVE STYLES
+   ============================================================ */
+@media (max-width: 950px) {
+  .explorerContainer {
+    grid-template-columns: 280px 1fr;
+    gap: 1.5rem;
   }
-  .outerOrbitRing {
-    width: 360px;
-    height: 360px;
+  .orbitPathRing {
+    width: 320px;
+    height: 320px;
   }
-  .centralWheel {
-    width: 220px;
-    height: 220px;
-    margin-top: -110px;
-    margin-left: -110px;
+  .centerDomainNode {
+    width: 210px;
+    height: 210px;
+    margin-top: -105px;
+    margin-left: -105px;
   }
-  .categoryTitle {
-    font-size: 1.2rem;
-  }
-  .satelliteWheel {
-    width: 125px;
-    height: 125px;
-    margin-top: -62px;
-    margin-left: -62px;
+  .domainName {
+    font-size: 1.15rem;
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 800px) {
   .skills {
     padding: 4rem 0 5rem 0;
   }
@@ -330,17 +515,31 @@
     font-size: 2.2rem;
   }
 
-  .orbitSystem {
-    height: 520px;
-    max-width: 100%;
+  .explorerContainer {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
-  .outerOrbitRing {
-    width: 280px;
-    height: 280px;
+  .leftNavigator {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
   }
 
-  .centralWheel {
+  .connectorLineContainer {
+    display: none;
+  }
+
+  .rightOrbitSystem {
+    height: 480px;
+  }
+
+  .orbitPathRing {
+    width: 270px;
+    height: 270px;
+  }
+
+  .centerDomainNode {
     width: 180px;
     height: 180px;
     margin-top: -90px;
@@ -348,18 +547,18 @@
     padding: 1rem;
   }
 
-  .categoryTitle {
+  .domainName {
     font-size: 1.05rem;
   }
 
-  .categorySubtitle {
+  .domainSubtitle {
     font-size: 0.7rem;
   }
 
-  .categoryDesc {
+  .domainDesc {
     font-size: 0.7rem;
     max-width: 140px;
-    margin-top: 0.4rem;
+    margin-top: 0.35rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -368,23 +567,28 @@
   }
 
   .skillPill {
-    font-size: 0.75rem;
-    padding: 0.38rem 0.75rem;
+    font-size: 0.78rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .leftNavigator {
+    grid-template-columns: 1fr;
+  }
+  
+  .initialEcosystem {
+    height: 460px;
   }
 
-  .satelliteWheel {
-    width: 100px;
-    height: 100px;
-    margin-top: -50px;
-    margin-left: -50px;
-    padding: 0.5rem;
+  .initialDomainNode {
+    width: 125px;
+    height: 125px;
+    margin-top: -62px;
+    margin-left: -62px;
   }
 
-  .satelliteTitle {
-    font-size: 0.72rem;
-  }
-
-  .satelliteIndicator {
-    display: none;
+  .initialDomainTitle {
+    font-size: 0.78rem;
   }
 }
