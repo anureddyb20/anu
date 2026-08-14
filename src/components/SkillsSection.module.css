@@ -54,8 +54,8 @@
 }
 
 .highlight {
-  color: #00f0ff;
-  text-shadow: 0 0 35px rgba(0, 240, 255, 0.45);
+  color: #ffffff;
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.4);
 }
 
 .grid {
@@ -66,17 +66,17 @@
 
 .categoryCard {
   padding: 1.8rem;
-  background: rgba(6, 20, 40, 0.45);
-  border: 1px solid rgba(0, 240, 255, 0.15);
+  background: #111111;
+  border: 1px solid #292929;
   border-radius: 20px;
-  box-shadow: 0 8px 32px 0 rgba(0, 100, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .categoryCard:hover {
   transform: translateY(-4px);
-  border-color: rgba(0, 240, 255, 0.35);
-  box-shadow: 0 12px 30px rgba(0, 100, 255, 0.18);
+  border-color: #4a4a4a;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
 .categoryTitle {
@@ -84,7 +84,7 @@
   font-weight: 600;
   color: #ffffff;
   margin: 0 0 1.2rem 0;
-  border-left: 3px solid #00f0ff;
+  border-left: 3px solid #ffffff;
   padding-left: 0.6rem;
 }
 
@@ -98,18 +98,18 @@
   display: inline-block;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #94a3b8;
-  background: rgba(6, 20, 50, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #a0a0a0;
+  background: #171717;
+  border: 1px solid #292929;
   padding: 0.45rem 0.85rem;
   border-radius: 30px;
   transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .skillBadge:hover {
-  color: #00f0ff;
-  border-color: rgba(0, 240, 255, 0.4);
-  background: rgba(0, 240, 255, 0.1);
+  color: #ffffff;
+  border-color: #4a4a4a;
+  background: rgba(255, 255, 255, 0.08);
   transform: scale(1.05);
 }
 

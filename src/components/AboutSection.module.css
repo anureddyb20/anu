@@ -29,12 +29,12 @@
 }
 
 .highlight {
-  color: #00f0ff;
-  text-shadow: 0 0 35px rgba(0, 240, 255, 0.45);
+  color: #ffffff;
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.4);
 }
 
 .paragraph {
-  color: #94a3b8;
+  color: #a0a0a0;
   font-size: 1.05rem;
   line-height: 1.8;
   margin: 0;

@@ -21,23 +21,23 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 1rem;
-  background: rgba(0, 240, 255, 0.08);
-  border: 1px solid rgba(0, 240, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid #292929;
   border-radius: 9999px;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--accent-cyan, #00f0ff);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+  color: #ffffff;
+  box-shadow: none;
 }
 
 .badgeDot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--accent-cyan, #00f0ff);
-  box-shadow: 0 0 8px var(--accent-cyan, #00f0ff);
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 .heading {
@@ -50,13 +50,13 @@
 }
 
 .highlight {
-  color: var(--accent-cyan, #00f0ff);
-  text-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
 }
 
 .subtitle {
   font-size: 1.05rem;
-  color: var(--text-secondary, #94a3b8);
+  color: #a0a0a0;
   line-height: 1.6;
   margin: 0;
 }
@@ -68,7 +68,7 @@
   transform: translateX(-50%);
   width: 650px;
   height: 350px;
-  background: radial-gradient(ellipse, rgba(0, 100, 255, 0.12) 0%, rgba(0, 240, 255, 0.04) 50%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.04) 0%, rgba(200, 200, 200, 0.01) 50%, transparent 70%);
   pointer-events: none;
   z-index: 0;
   filter: blur(40px);

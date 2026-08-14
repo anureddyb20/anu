@@ -25,10 +25,10 @@
     radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1px),
     radial-gradient(circle, rgba(255, 255, 255, 0.65) 1px, transparent 1px),
     radial-gradient(circle, rgba(255, 255, 255, 0.5) 1.5px, transparent 1.5px),
-    /* Cyan stars */
-    radial-gradient(circle, rgba(0, 240, 255, 0.55) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(0, 240, 255, 0.4) 2px, transparent 2px),
-    radial-gradient(circle, rgba(0, 240, 255, 0.45) 1px, transparent 1px);
+    /* Silver stars */
+    radial-gradient(circle, rgba(200, 200, 200, 0.45) 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(180, 180, 180, 0.35) 2px, transparent 2px),
+    radial-gradient(circle, rgba(220, 220, 220, 0.4) 1px, transparent 1px);
   background-size: 
     160px 160px, 
     210px 210px, 
@@ -76,13 +76,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(6, 20, 50, 0.55);
-  border: 1px solid rgba(0, 240, 255, 0.2);
+  background: #111111;
+  border: 1px solid #292929;
   padding: 0.4rem 1rem;
   border-radius: 30px;
   width: fit-content;
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: #a0a0a0;
 }
 
 .statusDot {
@@ -109,12 +109,12 @@
 }
 
 .highlight {
-  color: #00f0ff;
-  text-shadow: 0 0 40px rgba(0, 240, 255, 0.5);
+  color: #ffffff;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
 }
 
 .description {
-  color: #94a3b8;
+  color: #a0a0a0;
   font-size: 0.98rem;
   max-width: 380px;
   line-height: 1.75;
@@ -136,16 +136,18 @@
   border-radius: 30px;
   font-size: 0.9rem;
   font-weight: 600;
-  background: #00f0ff;
-  color: #020813;
+  background: #ffffff;
+  color: #000000;
   text-decoration: none;
-  box-shadow: 0 0 22px rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
 }
 
 .primaryBtn:hover {
+  background: #e5e5e5;
+  color: #000000;
   transform: translateY(-2px);
-  box-shadow: 0 0 38px rgba(0, 240, 255, 0.55);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.35);
 }
 
 .secondaryBtn {
@@ -157,15 +159,15 @@
   font-size: 0.9rem;
   font-weight: 600;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #333333;
   color: #ffffff;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .secondaryBtn:hover {
-  border-color: #00f0ff;
-  background: rgba(0, 240, 255, 0.08);
+  border-color: #4a4a4a;
+  background: rgba(255, 255, 255, 0.05);
   transform: translateY(-2px);
 }
 
@@ -181,16 +183,17 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: rgba(6, 20, 50, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #94a3b8;
+  background: #111111;
+  border: 1px solid #292929;
+  color: #a0a0a0;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .socialBtn:hover {
-  color: #00f0ff;
-  border-color: rgba(0, 240, 255, 0.3);
+  color: #ffffff;
+  border-color: #4a4a4a;
+  background: #171717;
   transform: translateY(-2px);
 }
 
@@ -217,20 +220,20 @@
   border-radius: 50%;
   z-index: 2; /* Stacked above globeNetworkBg, but below personWrap */
 
-  /* Soft translucent sphere gradient - lets background code shine through */
+  /* Soft translucent sphere gradient in monochrome dark grey tones */
   background: radial-gradient(
     circle at 40% 36%,
-    rgba(25, 100, 230, 0.28) 0%,
-    rgba(8, 60, 180, 0.22)  35%,
-    rgba(3, 22, 90, 0.28)  68%,
-    rgba(1, 7, 28, 0.4)  100%
+    rgba(60, 60, 60, 0.3) 0%,
+    rgba(35, 35, 35, 0.25) 35%,
+    rgba(20, 20, 20, 0.3) 68%,
+    rgba(8, 8, 8, 0.5) 100%
   );
 
-  /* Layered glow rings matching reference */
+  /* Layered silver/white glow rings */
   box-shadow:
-    0 0 35px  rgba(0, 110, 255, 0.45),
-    0 0 75px  rgba(0,  80, 220, 0.25),
-    inset 0 0 55px rgba(0, 100, 255, 0.18);
+    0 0 35px  rgba(255, 255, 255, 0.08),
+    0 0 75px  rgba(200, 200, 200, 0.05),
+    inset 0 0 55px rgba(255, 255, 255, 0.05);
 }
 
 
@@ -241,8 +244,8 @@
   inset: 0;
   border-radius: 50%;
   background-image:
-    linear-gradient(rgba(0, 180, 255, 0.16) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 180, 255, 0.16) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 42px 42px;
   mask-image: radial-gradient(
     circle at center,
@@ -264,7 +267,7 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 24%, rgba(145, 215, 255, 0.3) 0%, transparent 50%);
+  background: radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
 }
 
 
@@ -298,8 +301,8 @@
   max-width: none !important;
   background: transparent;
   filter:
-    drop-shadow(0 0 22px rgba(0, 180, 255, 0.7))
-    drop-shadow(0 0  8px rgba(0, 220, 255, 0.45));
+    drop-shadow(0 0 22px rgba(255, 255, 255, 0.12))
+    drop-shadow(0 0  8px rgba(200, 200, 200, 0.15));
 }
 
 /* Code card — bottom-center of portrait area */

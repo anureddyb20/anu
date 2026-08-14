@@ -55,7 +55,7 @@
   height: 36px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid #292929;
   color: var(--text-secondary);
 }
 
@@ -94,8 +94,8 @@
   gap: 0.5rem;
   padding: 0.75rem 1.25rem;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid #292929;
+  background: #111111;
   color: var(--text-primary);
   font-size: 0.9rem;
   font-weight: 500;
@@ -104,8 +104,8 @@
 }
 
 .moreBtn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: #171717;
+  border-color: #4a4a4a;
 }
 
 /* Expertise Card Specifics */
@@ -149,7 +149,7 @@
 
 .progressBar {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
+  background: linear-gradient(90deg, #666666 0%, #ffffff 100%);
   border-radius: 3px;
   position: relative;
   /* Add an animation for initial load */
@@ -163,7 +163,7 @@
   right: 0;
   height: 100%;
   width: 20px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
   filter: blur(5px);
 }
 
