@@ -53,11 +53,8 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* ── ZONE 2: Center portrait + globe ── */}
+          {/* ── ZONE 2: Center portrait ── */}
           <div className={styles.portraitCol}>
-            {/* Glowing sphere */}
-            <div className={styles.globe}></div>
-
             {/* Transparent portrait */}
             <div className={styles.personWrap}>
               {/* Use unoptimized to prevent Next.js adding background wrapper */}
