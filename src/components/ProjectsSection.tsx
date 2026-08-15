@@ -22,7 +22,7 @@ export default function ProjectsSection() {
         </div>
 
         <h2 className={styles.heading}>
-          Selected <span className={styles.highlight}>Projects</span>
+          Featured <span className={styles.highlight}>Projects</span>
         </h2>
 
         <p className={styles.subtitle}>
