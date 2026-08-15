@@ -53,7 +53,12 @@ export default function CertificateModal({ certificate, onClose }: CertificateMo
         </button>
 
         {/* Top Preview Canvas */}
-        <div className={styles.previewBox}>
+        <div
+          className={styles.previewBox}
+          onClick={handleOpenPdf}
+          style={{ cursor: 'pointer' }}
+          title="Click to view original PDF"
+        >
           <CertificatePdfPreview
             previewImage={certificate.previewImage}
             pdfUrl={certificate.fileUrl}
@@ -97,22 +102,6 @@ export default function CertificateModal({ certificate, onClose }: CertificateMo
           {certificate.description && (
             <p className={styles.description}>{certificate.description}</p>
           )}
-
-          {/* Action Row */}
-          <div className={styles.actionRow}>
-            <button type="button" className={styles.viewBtn} onClick={handleOpenPdf}>
-              <span>VIEW ORIGINAL CERTIFICATE</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-            </button>
-
-            <button type="button" className={styles.cancelBtn} onClick={onClose}>
-              Close
-            </button>
-          </div>
         </div>
       </div>
     </div>
