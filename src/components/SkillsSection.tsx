@@ -45,6 +45,7 @@ const DOMAINS: DomainData[] = [
 export default function SkillsSection() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [hoveredDomainId, setHoveredDomainId] = useState<string | null>(null);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [orbitAngle, setOrbitAngle] = useState<number>(0);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -87,7 +88,7 @@ export default function SkillsSection() {
     setHoveredSkill(null);
   };
 
-  // Get physical 2D coordinates for category circles across both states
+  // Fixed 2D Coordinates mapping per domain to ensure 100% glitch-free transitions
   const getCirclePosition = (domainId: string) => {
     // ── STATE 1: Initial Balanced Ecosystem (selectedId === null) ──
     if (selectedId === null) {
@@ -109,31 +110,30 @@ export default function SkillsSection() {
       return initialDesktopMap[domainId] || { x: 0, y: 0 };
     }
 
-    // ── STATE 2: Category Selected (selectedId !== null) ──
-    // Selected Circle: Travels physically to RIGHT SIDE
+    // ── STATE 2: Category Selected ──
+    // Active Selected Domain -> Travels to RIGHT side
     if (domainId === selectedId) {
       return isMobile ? { x: 0, y: 100 } : { x: 250, y: 0 };
     }
 
-    // Inactive Circles: Remain on LEFT SIDE as CIRCULAR NODES
-    const inactiveDomains = DOMAINS.filter((d) => d.id !== selectedId);
-    const inactiveIndex = inactiveDomains.findIndex((d) => d.id === domainId);
-
+    // Inactive Domains -> Sit at DETERMINISTIC FIXED LEFT SLOTS (never swap or jump)
     if (isMobile) {
-      const mobileLeftMap = [
-        { x: -115, y: -175 },
-        { x: 0, y: -175 },
-        { x: 115, y: -175 }
-      ];
-      return mobileLeftMap[inactiveIndex % 3];
+      const fixedMobileLeftMap: Record<string, { x: number; y: number }> = {
+        frontend: { x: -120, y: -175 },
+        hardware: { x: -40, y: -175 },
+        tools: { x: 40, y: -175 },
+        backend: { x: 120, y: -175 }
+      };
+      return fixedMobileLeftMap[domainId] || { x: 0, y: 0 };
     }
 
-    const desktopLeftMap = [
-      { x: -280, y: -145 },
-      { x: -330, y: 0 },
-      { x: -280, y: 145 }
-    ];
-    return desktopLeftMap[inactiveIndex % 3];
+    const fixedDesktopLeftMap: Record<string, { x: number; y: number }> = {
+      frontend: { x: -280, y: -150 },
+      hardware: { x: -330, y: -50 },
+      tools: { x: -330, y: 50 },
+      backend: { x: -280, y: 150 }
+    };
+    return fixedDesktopLeftMap[domainId] || { x: 0, y: 0 };
   };
 
   return (
@@ -175,6 +175,7 @@ export default function SkillsSection() {
         onMouseLeave={() => {
           setIsHovered(false);
           setHoveredSkill(null);
+          setHoveredDomainId(null);
         }}
       >
         {/* Central Prompt Node (State 1 Initial Ecosystem) */}
@@ -219,16 +220,20 @@ export default function SkillsSection() {
         {/* ── 100% PURE CIRCULAR DOMAIN NODES ── */}
         {DOMAINS.map((domain) => {
           const isSelected = domain.id === selectedId;
+          const isHoveredDomain = hoveredDomainId === domain.id && !isSelected;
           const pos = getCirclePosition(domain.id);
+          const scale = isHoveredDomain ? 1.08 : 1;
 
           return (
             <button
               key={domain.id}
               className={`${styles.domainCircle} ${isSelected ? styles.domainCircleActive : styles.domainCircleInactive}`}
               style={{
-                transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`
+                transform: `translate3d(${pos.x}px, ${pos.y}px, 0) scale(${scale})`
               }}
               onClick={() => handleDomainClick(domain.id)}
+              onMouseEnter={() => setHoveredDomainId(domain.id)}
+              onMouseLeave={() => setHoveredDomainId(null)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
@@ -270,7 +275,7 @@ export default function SkillsSection() {
 
           return (
             <div
-              key={skill}
+              key={`${activeDomain.id}-${skill}`}
               className={styles.skillNode}
               style={{
                 transform: `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0)`
