@@ -39,7 +39,11 @@ export default function CertificateCard({
     >
       {/* Visual Image / Canvas Box */}
       <div className={styles.visualContainer}>
-        <CertificatePdfPreview pdfUrl={certificate.fileUrl} title={certificate.title} />
+        <CertificatePdfPreview
+          previewImage={certificate.previewImage}
+          pdfUrl={certificate.fileUrl}
+          title={certificate.title}
+        />
 
         <div className={styles.topPillRow}>
           <span className={styles.orgPill}>{certificate.organization}</span>
