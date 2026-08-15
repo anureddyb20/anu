@@ -33,6 +33,10 @@ export default function CertificateModal({ certificate, onClose }: CertificateMo
     window.open(certificate.fileUrl, '_blank', 'noopener,noreferrer');
   };
 
+  const hasDate = certificate.date && certificate.date.trim() !== '' && !certificate.date.includes('ADD DATE');
+  const hasLocation = certificate.location && certificate.location.trim() !== '' && !certificate.location.includes('ADD LOCATION');
+  const showMetaGrid = hasDate || hasLocation;
+
   return (
     <div className={styles.overlay} onClick={onClose} role="dialog" aria-modal="true">
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -64,27 +68,35 @@ export default function CertificateModal({ certificate, onClose }: CertificateMo
           <h2 className={styles.title}>{certificate.title}</h2>
           <div className={styles.orgName}>{certificate.organization}</div>
 
-          <div className={styles.metaGrid}>
-            <div className={styles.metaItem}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                <line x1="16" y1="2" x2="16" y2="6" />
-                <line x1="8" y1="2" x2="8" y2="6" />
-                <line x1="3" y1="10" x2="21" y2="10" />
-              </svg>
-              <span>Date: {certificate.date}</span>
-            </div>
+          {showMetaGrid && (
+            <div className={styles.metaGrid}>
+              {hasDate && (
+                <div className={styles.metaItem}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                  <span>Date: {certificate.date}</span>
+                </div>
+              )}
 
-            <div className={styles.metaItem}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              <span>Location: {certificate.location}</span>
+              {hasLocation && (
+                <div className={styles.metaItem}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  <span>Location: {certificate.location}</span>
+                </div>
+              )}
             </div>
-          </div>
+          )}
 
-          <p className={styles.description}>{certificate.description}</p>
+          {certificate.description && (
+            <p className={styles.description}>{certificate.description}</p>
+          )}
 
           {/* Action Row */}
           <div className={styles.actionRow}>

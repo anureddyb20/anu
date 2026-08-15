@@ -44,11 +44,6 @@ export default function CertificateCard({
           pdfUrl={certificate.fileUrl}
           title={certificate.title}
         />
-
-        <div className={styles.topPillRow}>
-          <span className={styles.orgPill}>{certificate.organization}</span>
-          <span className={styles.pdfBadge}>PDF</span>
-        </div>
       </div>
 
       {/* Card Info */}
