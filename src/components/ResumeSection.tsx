@@ -22,10 +22,6 @@ export default function ResumeSection() {
         <h2 className={styles.heading}>
           RESUME & <span className={styles.highlight}>EXPERIENCE</span>
         </h2>
-
-        <p className={styles.subtitle}>
-          Official resume of {resumeData.name}. View or download the verified PDF document.
-        </p>
       </div>
 
       {/* Main 2-Column Grid */}
