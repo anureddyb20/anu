@@ -36,16 +36,7 @@ export default function Navbar() {
             Certificates
           </Link>
         </li>
-        <li>
-          <Link href="#process" className={styles.navLink}>
-            Process
-          </Link>
-        </li>
-        <li>
-          <Link href="#testimonials" className={styles.navLink}>
-            Testimonials
-          </Link>
-        </li>
+
         <li>
           <Link href="#contact" className={styles.navLink}>
             Contact
