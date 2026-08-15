@@ -4,6 +4,7 @@ import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import CertificatesSection from '@/components/CertificatesSection';
+import ResumeSection from '@/components/ResumeSection';
 
 import styles from './page.module.css';
 
@@ -16,8 +17,9 @@ export default function Home() {
       <SkillsSection />
       <ProjectsSection />
       <CertificatesSection />
+      <ResumeSection />
       
-      {/* Additional sections (Process, Testimonials, Contact) can be added here */}
+      {/* Additional sections can be added here */}
       <div className={styles.spacer}></div>
     </main>
   );

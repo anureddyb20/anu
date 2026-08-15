@@ -1,0 +1,274 @@
+.resumeSection {
+  position: relative;
+  width: 100%;
+  padding: 6rem 0 6rem 0;
+  background: transparent;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.headerContainer {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 3.5rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sectionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  background: #111111;
+  border: 1px solid #282828;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.highlight {
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: #888888;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.gridContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Left Column: Resume Preview Card */
+.previewCard {
+  background: #111111;
+  border: 1px solid #282828;
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.previewCard:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-4px);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background: #050505;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #202020;
+}
+
+.actionRow {
+  display: flex;
+  gap: 14px;
+}
+
+.viewBtn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #000000;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+}
+
+.viewBtn:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(255, 255, 255, 0.25);
+}
+
+.downloadBtn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  background: #181818;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.downloadBtn:hover {
+  background: #252525;
+  border-color: #555555;
+  transform: translateY(-2px);
+}
+
+/* Right Column: Structured Overview */
+.overviewCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.infoBlock {
+  background: #111111;
+  border: 1px solid #242424;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.blockHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.blockTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.cgpaBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  padding: 4px 10px;
+  background: #1c1c1c;
+  border: 1px solid #383838;
+  border-radius: 9999px;
+}
+
+.eduDegree {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.eduInst {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.skillsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.groupLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #888888;
+}
+
+.pillsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skillPill {
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 8px;
+}
+
+.listRow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.listItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.dotIcon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+  .imageWrapper {
+    height: 420px;
+  }
+}

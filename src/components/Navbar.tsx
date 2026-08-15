@@ -36,6 +36,11 @@ export default function Navbar() {
             Certificates
           </Link>
         </li>
+        <li>
+          <Link href="#resume" className={styles.navLink}>
+            Resume
+          </Link>
+        </li>
 
         <li>
           <Link href="#contact" className={styles.navLink}>
