@@ -48,14 +48,21 @@ export default function SkillsSection() {
   const [hoveredDomainId, setHoveredDomainId] = useState<string | null>(null);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [orbitAngle, setOrbitAngle] = useState<number>(0);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [screenType, setScreenType] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
 
   const activeDomain = DOMAINS.find((d) => d.id === selectedId) || null;
 
   // Responsive screen size listener
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const w = window.innerWidth;
+      if (w <= 768) {
+        setScreenType('mobile');
+      } else if (w <= 950) {
+        setScreenType('tablet');
+      } else {
+        setScreenType('desktop');
+      }
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -88,52 +95,72 @@ export default function SkillsSection() {
     setHoveredSkill(null);
   };
 
-  // Fixed 2D Coordinates mapping per domain to ensure 100% glitch-free transitions
+  // Mathematical 2D Tangent Placement (0 gap between circles)
   const getCirclePosition = (domainId: string) => {
-    // ── STATE 1: Initial Balanced Ecosystem (selectedId === null) ──
+    // ── STATE 1: Initial Balanced Tangent Ecosystem (selectedId === null) ──
     if (selectedId === null) {
-      if (isMobile) {
-        const initialMobileMap: Record<string, { x: number; y: number }> = {
-          frontend: { x: 0, y: -140 },
-          hardware: { x: 130, y: 30 },
-          tools: { x: 0, y: 140 },
-          backend: { x: -130, y: 30 }
-        };
-        return initialMobileMap[domainId] || { x: 0, y: 0 };
+      if (screenType === 'mobile') {
+        // Radius 60px, Diameter 120px. Distance d = 60 * sqrt(2) = 84.85px
+        return (
+          {
+            frontend: { x: 0, y: -84.85 },
+            hardware: { x: 84.85, y: 0 },
+            tools: { x: 0, y: 84.85 },
+            backend: { x: -84.85, y: 0 }
+          }[domainId] || { x: 0, y: 0 }
+        );
       }
-      const initialDesktopMap: Record<string, { x: number; y: number }> = {
-        frontend: { x: 0, y: -190 },
-        hardware: { x: 210, y: 30 },
-        tools: { x: 0, y: 190 },
-        backend: { x: -210, y: 30 }
-      };
-      return initialDesktopMap[domainId] || { x: 0, y: 0 };
+
+      if (screenType === 'tablet') {
+        // Radius 70px, Diameter 140px. Distance d = 70 * sqrt(2) = 98.99px
+        return (
+          {
+            frontend: { x: 0, y: -98.99 },
+            hardware: { x: 98.99, y: 0 },
+            tools: { x: 0, y: 98.99 },
+            backend: { x: -98.99, y: 0 }
+          }[domainId] || { x: 0, y: 0 }
+        );
+      }
+
+      // Desktop: Radius 85px, Diameter 170px. Distance d = 85 * sqrt(2) = 120.21px
+      return (
+        {
+          frontend: { x: 0, y: -120.21 },
+          hardware: { x: 120.21, y: 0 },
+          tools: { x: 0, y: 120.21 },
+          backend: { x: -120.21, y: 0 }
+        }[domainId] || { x: 0, y: 0 }
+      );
     }
 
     // ── STATE 2: Category Selected ──
-    // Active Selected Domain -> Travels to RIGHT side
+    // Active Selected Domain -> Travels to RIGHT side (or BOTTOM on Mobile)
     if (domainId === selectedId) {
-      return isMobile ? { x: 0, y: 100 } : { x: 250, y: 0 };
+      if (screenType === 'mobile') return { x: 0, y: 90 };
+      if (screenType === 'tablet') return { x: 180, y: 0 };
+      return { x: 230, y: 0 };
     }
 
-    // Inactive Domains -> Sit at DETERMINISTIC FIXED LEFT SLOTS (never swap or jump)
-    if (isMobile) {
-      const fixedMobileLeftMap: Record<string, { x: number; y: number }> = {
-        frontend: { x: -120, y: -175 },
-        hardware: { x: -40, y: -175 },
-        tools: { x: 40, y: -175 },
-        backend: { x: 120, y: -175 }
-      };
-      return fixedMobileLeftMap[domainId] || { x: 0, y: 0 };
+    // Inactive Domains -> Sit in deterministic tangent stack with ZERO gap
+    const inactiveDomainIds = DOMAINS.filter((d) => d.id !== selectedId).map((d) => d.id);
+    const indexInInactive = inactiveDomainIds.indexOf(domainId); // 0, 1, or 2
+
+    if (screenType === 'mobile') {
+      // Top horizontal row: y = -150px. Inactive diameter = 90px. Centers at -90, 0, +90
+      const xPos = (indexInInactive - 1) * 90;
+      return { x: xPos, y: -150 };
     }
 
-    const fixedDesktopLeftMap: Record<string, { x: number; y: number }> = {
-      frontend: { x: -280, y: -150 },
-      hardware: { x: -330, y: -50 },
-      tools: { x: -330, y: 50 },
-      backend: { x: -280, y: 150 }
-    };
-    return fixedDesktopLeftMap[domainId] || { x: 0, y: 0 };
+    if (screenType === 'tablet') {
+      // Left vertical column: x = -200px. Inactive diameter = 120px. Centers at -120, 0, +120
+      const yPos = (indexInInactive - 1) * 120;
+      return { x: -200, y: yPos };
+    }
+
+    // Desktop: Left vertical column: x = -240px. Inactive diameter = 140px. Centers at -140, 0, +140
+    const yPos = (indexInInactive - 1) * 140;
+    return { x: -240, y: yPos };
   };
 
   return (
@@ -178,25 +205,25 @@ export default function SkillsSection() {
           setHoveredDomainId(null);
         }}
       >
-        {/* Central Prompt Node (State 1 Initial Ecosystem) */}
+        {/* Central Prompt Core Node (State 1 Initial Ecosystem - Tangent to all 4 circles) */}
         <div 
           className={styles.centerPromptNode}
           style={{
             opacity: selectedId === null ? 1 : 0,
             pointerEvents: selectedId === null ? 'auto' : 'none',
-            transform: selectedId === null ? 'translate(-50%, -50%) scale(1)' : 'translate(-50%, -50%) scale(0.5)'
+            transform: selectedId === null ? 'translate(-50%, -50%) scale(1)' : 'translate(-50%, -50%) scale(0.4)'
           }}
         >
-          <span className={styles.centerPromptText}>Select a domain to explore</span>
+          <span className={styles.centerPromptTag}>EXPLORE</span>
           <svg 
             className={styles.centerPromptIcon} 
             xmlns="http://www.w3.org/2000/svg" 
-            width="20" 
-            height="20" 
+            width="14" 
+            height="14" 
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
-            strokeWidth="2" 
+            strokeWidth="2.5" 
             strokeLinecap="round" 
             strokeLinejoin="round"
           >
@@ -205,14 +232,16 @@ export default function SkillsSection() {
           </svg>
         </div>
 
-        {/* Orbit Path Ring for Expanded Right System (State 2) */}
+        {/* Orbit Path Ring for Expanded System (State 2) */}
         {selectedId !== null && (
           <div 
             className={styles.orbitRingPath}
             style={{
-              transform: isMobile 
-                ? 'translate(-50%, calc(-50% + 100px))' 
-                : 'translate(calc(-50% + 250px), -50%)'
+              transform: screenType === 'mobile' 
+                ? 'translate(-50%, calc(-50% + 90px))' 
+                : screenType === 'tablet'
+                  ? 'translate(calc(-50% + 180px), -50%)'
+                  : 'translate(calc(-50% + 230px), -50%)'
             }}
           ></div>
         )}
@@ -222,12 +251,19 @@ export default function SkillsSection() {
           const isSelected = domain.id === selectedId;
           const isHoveredDomain = hoveredDomainId === domain.id && !isSelected;
           const pos = getCirclePosition(domain.id);
-          const scale = isHoveredDomain ? 1.08 : 1;
+          const scale = isHoveredDomain ? 1.06 : 1;
+
+          let circleClass = styles.domainCircleInactive;
+          if (isSelected) {
+            circleClass = styles.domainCircleActive;
+          } else if (selectedId !== null) {
+            circleClass = styles.domainCircleInactiveCondensed;
+          }
 
           return (
             <button
               key={domain.id}
-              className={`${styles.domainCircle} ${isSelected ? styles.domainCircleActive : styles.domainCircleInactive}`}
+              className={`${styles.domainCircle} ${circleClass}`}
               style={{
                 transform: `translate3d(${pos.x}px, ${pos.y}px, 0) scale(${scale})`
               }}
@@ -262,13 +298,16 @@ export default function SkillsSection() {
         {/* ── EMERGING ORBITING SKILL NODES (Active Category) ── */}
         {activeDomain && activeDomain.skills.map((skill, idx) => {
           const total = activeDomain.skills.length;
-          const orbitRadius = isMobile ? 145 : 215;
+          const orbitRadius = screenType === 'mobile' ? 140 : screenType === 'tablet' ? 175 : 205;
           const baseAngle = (idx * 360) / total;
           const currentAngle = (baseAngle + orbitAngle) % 360;
           const rad = (currentAngle * Math.PI) / 180;
           
-          // Right side orbit center offset
-          const centerOffset = isMobile ? { x: 0, y: 100 } : { x: 250, y: 0 };
+          const centerOffset = screenType === 'mobile' 
+            ? { x: 0, y: 90 } 
+            : screenType === 'tablet' 
+              ? { x: 180, y: 0 } 
+              : { x: 230, y: 0 };
           const x = centerOffset.x + Math.cos(rad) * orbitRadius;
           const y = centerOffset.y + Math.sin(rad) * orbitRadius;
           const isSkillHovered = hoveredSkill === skill;
@@ -299,3 +338,4 @@ export default function SkillsSection() {
     </section>
   );
 }
+

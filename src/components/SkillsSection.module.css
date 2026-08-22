@@ -5,7 +5,7 @@
 .skills {
   position: relative;
   width: 100%;
-  padding: 6rem 0 7rem 0;
+  padding: 5rem 0 6rem 0;
   background: transparent;
   overflow: hidden;
 }
@@ -13,7 +13,7 @@
 .headerContainer {
   text-align: center;
   max-width: 750px;
-  margin: 0 auto 3rem auto;
+  margin: 0 auto 2.5rem auto;
   padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
@@ -67,7 +67,7 @@
   margin: 0;
 }
 
-/* ── RESET / EXPLORE ALL CONTROL ── */
+/* ── RESET CONTROL ── */
 .resetControl {
   position: absolute;
   top: 1rem;
@@ -106,7 +106,7 @@
   position: relative;
   width: 100%;
   max-width: 1050px;
-  height: 600px;
+  height: 580px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -114,49 +114,51 @@
   user-select: none;
 }
 
-/* Central Prompt Node (State 1) */
+/* Central Prompt Core Node (Tangent to 4 surrounding circles) */
 .centerPromptNode {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 190px;
-  height: 190px;
+  width: 70px;
+  height: 70px;
+  margin-top: -35px;
+  margin-left: -35px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #181818 0%, #101010 100%);
-  border: 1px dashed rgba(255, 255, 255, 0.2);
+  background: radial-gradient(circle at 35% 35%, #1e1e1e 0%, #0c0c0c 100%);
+  border: 1.5px dashed rgba(255, 255, 255, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1.2rem;
+  padding: 0.2rem;
   text-align: center;
   z-index: 2;
-  box-shadow: 0 0 35px rgba(0, 0, 0, 0.8);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.05);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
 
-.centerPromptText {
-  font-size: 0.78rem;
+.centerPromptTag {
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #a0a0a0;
-  line-height: 1.4;
+  line-height: 1;
 }
 
 .centerPromptIcon {
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
   color: #ffffff;
   animation: bounceSlow 2s ease-in-out infinite;
 }
 
 @keyframes bounceSlow {
   0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
+  50%      { transform: translateY(-3px); }
 }
 
-/* ── 100% PURE CIRCULAR DOMAIN NODES ── */
+/* ── DOMAIN CIRCLE NODES ── */
 .domainCircle {
   position: absolute;
   top: 50%;
@@ -171,76 +173,99 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   outline: none;
-  /* Smooth physical travelling transition */
-  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1),
-              width 0.7s cubic-bezier(0.25, 1, 0.5, 1),
-              height 0.7s cubic-bezier(0.25, 1, 0.5, 1),
-              margin-top 0.7s cubic-bezier(0.25, 1, 0.5, 1),
-              margin-left 0.7s cubic-bezier(0.25, 1, 0.5, 1),
+  /* Hardware-accelerated smooth transitions */
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-top 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-left 0.65s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.3s ease,
               background 0.3s ease,
               box-shadow 0.3s ease;
   will-change: transform, width, height;
 }
 
-/* Initial / Unselected Circle (State 1 & Left Ecosystem) */
+/* State 1: Unselected Initial Diamond Cluster Circles (Tangent with 0 gap) */
 .domainCircleInactive {
-  width: 145px;
-  height: 145px;
-  margin-top: -72.5px;
-  margin-left: -72.5px;
-  background: rgba(17, 17, 17, 0.9);
-  border: 1px solid #292929;
+  width: 170px;
+  height: 170px;
+  margin-top: -85px;
+  margin-left: -85px;
+  background: radial-gradient(circle at 35% 35%, rgba(24, 24, 24, 0.96) 0%, rgba(10, 10, 10, 0.96) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   z-index: 6;
 }
 
 .domainCircleInactive:hover,
 .domainCircleInactive:focus-visible {
   border-color: #ffffff;
-  background: #171717;
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.2);
+  background: radial-gradient(circle at 35% 35%, rgba(32, 32, 32, 0.98) 0%, rgba(16, 16, 16, 0.98) 100%);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.25);
 }
 
-/* Expanded Active Circle on RIGHT (State 2) */
+/* State 2: Inactive Circles condensed on the Left Column (Tangent with 0 gap) */
+.domainCircleInactiveCondensed {
+  width: 140px;
+  height: 140px;
+  margin-top: -70px;
+  margin-left: -70px;
+  background: radial-gradient(circle at 35% 35%, rgba(20, 20, 20, 0.92) 0%, rgba(8, 8, 8, 0.92) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.6);
+  z-index: 8;
+}
+
+.domainCircleInactiveCondensed:hover,
+.domainCircleInactiveCondensed:focus-visible {
+  border-color: #ffffff;
+  background: radial-gradient(circle at 35% 35%, rgba(30, 30, 30, 0.96) 0%, rgba(14, 14, 14, 0.96) 100%);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+}
+
+/* State 2: Active Expanded Selected Domain Circle */
 .domainCircleActive {
-  width: 240px;
-  height: 240px;
-  margin-top: -120px;
-  margin-left: -120px;
-  background: radial-gradient(circle at 35% 35%, #1c1c1c 0%, #111111 75%, #080808 100%);
-  border: 1.5px solid #ffffff;
-  box-shadow: 0 0 60px rgba(255, 255, 255, 0.18), inset 0 0 30px rgba(255, 255, 255, 0.05);
+  width: 230px;
+  height: 230px;
+  margin-top: -115px;
+  margin-left: -115px;
+  background: radial-gradient(circle at 35% 35%, #1e1e1e 0%, #111111 75%, #050505 100%);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.22), inset 0 0 25px rgba(255, 255, 255, 0.08);
   z-index: 12;
 }
 
 .domainTitle {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin: 0;
   line-height: 1.2;
+  padding: 0 0.5rem;
 }
 
 .domainCircleActive .domainTitle {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
 }
 
 .domainSubtitle {
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #a0a0a0;
   margin-top: 0.25rem;
   text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .domainDesc {
-  font-size: 0.75rem;
-  color: #666666;
-  margin-top: 0.6rem;
+  font-size: 0.74rem;
+  color: #888888;
+  margin-top: 0.5rem;
   line-height: 1.4;
-  max-width: 180px;
+  max-width: 170px;
+  padding: 0 0.5rem;
 }
 
 .domainExploreTag {
@@ -248,18 +273,20 @@
   color: #a0a0a0;
   margin-top: 0.35rem;
   font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
-/* ── RIGHT TECHNOLOGY ORBIT RINGS & NODES ── */
+/* ── ORBIT RINGS & SKILL NODES ── */
 .orbitRingPath {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 430px;
-  height: 430px;
+  width: 410px;
+  height: 410px;
+  margin-top: -205px;
+  margin-left: -205px;
   border-radius: 50%;
-  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
   pointer-events: none;
   z-index: 1;
   animation: orbitRingFadeIn 0.5s ease forwards;
@@ -268,11 +295,11 @@
 @keyframes orbitRingFadeIn {
   from {
     opacity: 0;
-    transform: translate(calc(-50% + 250px), -50%) scale(0.8);
+    transform: translate(calc(-50% + 230px), -50%) scale(0.85);
   }
   to {
     opacity: 1;
-    transform: translate(calc(-50% + 250px), -50%) scale(1);
+    transform: translate(calc(-50% + 230px), -50%) scale(1);
   }
 }
 
@@ -285,7 +312,7 @@
   height: 8px;
   border-radius: 50%;
   background: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
 }
 
 .skillNode {
@@ -316,7 +343,7 @@
   border: 1px solid #333333;
   border-radius: 30px;
   color: #f5f5f5;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
@@ -354,35 +381,65 @@
 /* ============================================================
    RESPONSIVE STYLES
    ============================================================ */
-@media (max-width: 900px) {
+
+/* TABLET LAYOUT (769px to 950px) */
+@media (max-width: 950px) {
   .ecosystemStage {
     height: 540px;
   }
+
+  .centerPromptNode {
+    width: 58px;
+    height: 58px;
+    margin-top: -29px;
+    margin-left: -29px;
+  }
+
   .domainCircleInactive {
-    width: 125px;
-    height: 125px;
-    margin-top: -62.5px;
-    margin-left: -62.5px;
+    width: 140px;
+    height: 140px;
+    margin-top: -70px;
+    margin-left: -70px;
   }
+
+  .domainCircleInactiveCondensed {
+    width: 120px;
+    height: 120px;
+    margin-top: -60px;
+    margin-left: -60px;
+  }
+
   .domainCircleActive {
-    width: 200px;
-    height: 200px;
-    margin-top: -100px;
-    margin-left: -100px;
+    width: 190px;
+    height: 190px;
+    margin-top: -95px;
+    margin-left: -95px;
   }
+
+  .domainTitle {
+    font-size: 0.8rem;
+  }
+
+  .domainCircleActive .domainTitle {
+    font-size: 1.05rem;
+  }
+
   .orbitRingPath {
-    width: 320px;
-    height: 320px;
+    width: 350px;
+    height: 350px;
+    margin-top: -175px;
+    margin-left: -175px;
   }
 }
 
+/* MOBILE LAYOUT (<= 768px) */
 @media (max-width: 768px) {
   .skills {
-    padding: 4rem 0 5rem 0;
+    padding: 3.5rem 0 4.5rem 0;
   }
 
   .heading {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
   }
 
   .resetControl {
@@ -393,14 +450,32 @@
   }
 
   .ecosystemStage {
-    height: 520px;
+    height: 500px;
+  }
+
+  .centerPromptNode {
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    margin-left: -25px;
+  }
+
+  .centerPromptTag {
+    font-size: 0.52rem;
   }
 
   .domainCircleInactive {
-    width: 110px;
-    height: 110px;
-    margin-top: -55px;
-    margin-left: -55px;
+    width: 120px;
+    height: 120px;
+    margin-top: -60px;
+    margin-left: -60px;
+  }
+
+  .domainCircleInactiveCondensed {
+    width: 90px;
+    height: 90px;
+    margin-top: -45px;
+    margin-left: -45px;
   }
 
   .domainCircleActive {
@@ -411,19 +486,19 @@
   }
 
   .domainTitle {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
   }
 
   .domainCircleActive .domainTitle {
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 
   .domainSubtitle {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
   }
 
   .domainDesc {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     max-width: 130px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -433,12 +508,15 @@
   }
 
   .skillPill {
-    font-size: 0.75rem;
+    font-size: 0.74rem;
     padding: 0.38rem 0.75rem;
   }
 
   .orbitRingPath {
-    width: 270px;
-    height: 270px;
+    width: 280px;
+    height: 280px;
+    margin-top: -140px;
+    margin-left: -140px;
   }
 }
+
