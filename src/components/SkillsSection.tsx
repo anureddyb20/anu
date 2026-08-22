@@ -42,13 +42,25 @@ const DOMAINS: DomainData[] = [
   }
 ];
 
+// Anti-gravity zero-G cosmic dust particle coordinates
+const ANTIGRAVITY_PARTICLES = Array.from({ length: 14 }).map((_, i) => ({
+  id: i,
+  x: (i * 73 + 19) % 90 - 45, // -45% to +45%
+  y: (i * 47 + 31) % 90 - 45,
+  size: (i % 3) + 2,
+  duration: 4 + (i % 5) * 1.2,
+  delay: (i % 4) * 0.7
+}));
+
 export default function SkillsSection() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [hoveredDomainId, setHoveredDomainId] = useState<string | null>(null);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [orbitAngle, setOrbitAngle] = useState<number>(0);
+  const [floatTime, setFloatTime] = useState<number>(0);
   const [screenType, setScreenType] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
+  const [mouseOffset, setMouseOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const activeDomain = DOMAINS.find((d) => d.id === selectedId) || null;
 
@@ -69,7 +81,7 @@ export default function SkillsSection() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Continuous Orbit Rotation Loop
+  // Continuous Anti-Gravity Orbit & Weightless Levitation Physics Loop
   const lastTimeRef = useRef<number>(0);
   useEffect(() => {
     let animId: number;
@@ -78,6 +90,7 @@ export default function SkillsSection() {
         const delta = time - lastTimeRef.current;
         const speed = isHovered ? 0.003 : 0.012;
         setOrbitAngle((prev) => (prev + delta * speed) % 360);
+        setFloatTime((prev) => prev + delta * 0.0015);
       }
       lastTimeRef.current = time;
       animId = requestAnimationFrame(animate);
@@ -85,6 +98,23 @@ export default function SkillsSection() {
     animId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animId);
   }, [isHovered]);
+
+  // Anti-gravity cursor reaction field
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const nx = (e.clientX - centerX) / (rect.width / 2);
+    const ny = (e.clientY - centerY) / (rect.height / 2);
+    setMouseOffset({ x: nx * 14, y: ny * 14 });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setHoveredSkill(null);
+    setHoveredDomainId(null);
+    setMouseOffset({ x: 0, y: 0 });
+  };
 
   const handleDomainClick = (id: string) => {
     setSelectedId(id);
@@ -100,7 +130,6 @@ export default function SkillsSection() {
     // ── STATE 1: Initial Balanced Tangent Ecosystem (selectedId === null) ──
     if (selectedId === null) {
       if (screenType === 'mobile') {
-        // Radius 60px, Diameter 120px. Distance d = 60 * sqrt(2) = 84.85px
         return (
           {
             frontend: { x: 0, y: -84.85 },
@@ -112,7 +141,6 @@ export default function SkillsSection() {
       }
 
       if (screenType === 'tablet') {
-        // Radius 70px, Diameter 140px. Distance d = 70 * sqrt(2) = 98.99px
         return (
           {
             frontend: { x: 0, y: -98.99 },
@@ -135,30 +163,25 @@ export default function SkillsSection() {
     }
 
     // ── STATE 2: Category Selected ──
-    // Active Selected Domain -> Travels to RIGHT side (or BOTTOM on Mobile)
     if (domainId === selectedId) {
       if (screenType === 'mobile') return { x: 0, y: 90 };
       if (screenType === 'tablet') return { x: 180, y: 0 };
       return { x: 230, y: 0 };
     }
 
-    // Inactive Domains -> Sit in deterministic tangent stack with ZERO gap
     const inactiveDomainIds = DOMAINS.filter((d) => d.id !== selectedId).map((d) => d.id);
-    const indexInInactive = inactiveDomainIds.indexOf(domainId); // 0, 1, or 2
+    const indexInInactive = inactiveDomainIds.indexOf(domainId);
 
     if (screenType === 'mobile') {
-      // Top horizontal row: y = -150px. Inactive diameter = 90px. Centers at -90, 0, +90
       const xPos = (indexInInactive - 1) * 90;
       return { x: xPos, y: -150 };
     }
 
     if (screenType === 'tablet') {
-      // Left vertical column: x = -200px. Inactive diameter = 120px. Centers at -120, 0, +120
       const yPos = (indexInInactive - 1) * 120;
       return { x: -200, y: yPos };
     }
 
-    // Desktop: Left vertical column: x = -240px. Inactive diameter = 140px. Centers at -140, 0, +140
     const yPos = (indexInInactive - 1) * 140;
     return { x: -240, y: yPos };
   };
@@ -169,19 +192,19 @@ export default function SkillsSection() {
       <div className={styles.headerContainer}>
         <div className={styles.sectionBadge}>
           <span className={styles.badgeDot}></span>
-          Pure Circular Ecosystem
+          ANTIGRAVITY ECOSYSTEM EXPLORER
         </div>
         <h2 className={styles.heading}>
           TECHNICAL <span className={styles.highlight}>ECOSYSTEM EXPLORER</span>
         </h2>
         <p className={styles.subtitle}>
           {selectedId === null 
-            ? 'Select a domain circle to expand its interactive technology orbit.'
+            ? 'Select a floating domain circle to expand its interactive zero-G technology orbit.'
             : 'Exploring selected domain. Click any circular node on the left to switch or reset below.'}
         </p>
       </div>
 
-      {/* ── Reset Ecosystem Control (visible when a category is expanded) ── */}
+      {/* ── Reset Ecosystem Control ── */}
       {selectedId !== null && (
         <button
           className={styles.resetControl}
@@ -195,23 +218,45 @@ export default function SkillsSection() {
         </button>
       )}
 
-      {/* ── PURE CIRCULAR STAGE CONTAINER ── */}
+      {/* ── ANTIGRAVITY CIRCULAR STAGE CONTAINER ── */}
       <div 
         className={styles.ecosystemStage}
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => {
-          setIsHovered(false);
-          setHoveredSkill(null);
-          setHoveredDomainId(null);
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          transform: `perspective(1000px) rotateX(${-mouseOffset.y * 0.15}deg) rotateY(${mouseOffset.x * 0.15}deg)`
         }}
       >
-        {/* Central Prompt Core Node (State 1 Initial Ecosystem - Tangent to all 4 circles) */}
+        {/* Zero-G Floating Cosmic Particles Background */}
+        <div className={styles.antigravityParticlesField}>
+          {ANTIGRAVITY_PARTICLES.map((p) => {
+            const floatY = Math.sin(floatTime * 2 + p.id) * 12;
+            const floatX = Math.cos(floatTime * 1.5 + p.id) * 8;
+            return (
+              <span
+                key={p.id}
+                className={styles.antigravityParticle}
+                style={{
+                  left: `calc(50% + ${p.x}% + ${floatX}px)`,
+                  top: `calc(50% + ${p.y}% + ${floatY}px)`,
+                  width: `${p.size}px`,
+                  height: `${p.size}px`
+                }}
+              />
+            );
+          })}
+        </div>
+
+        {/* Central Prompt Core Node (State 1 Initial Ecosystem) */}
         <div 
           className={styles.centerPromptNode}
           style={{
             opacity: selectedId === null ? 1 : 0,
             pointerEvents: selectedId === null ? 'auto' : 'none',
-            transform: selectedId === null ? 'translate(-50%, -50%) scale(1)' : 'translate(-50%, -50%) scale(0.4)'
+            transform: selectedId === null 
+              ? `translate(-50%, -50%) translate3d(${mouseOffset.x * 0.4}px, ${mouseOffset.y * 0.4}px, 0) scale(1)` 
+              : 'translate(-50%, -50%) scale(0.4)'
           }}
         >
           <span className={styles.centerPromptTag}>EXPLORE</span>
@@ -246,12 +291,21 @@ export default function SkillsSection() {
           ></div>
         )}
 
-        {/* ── 100% PURE CIRCULAR DOMAIN NODES ── */}
-        {DOMAINS.map((domain) => {
+        {/* ── 100% PURE CIRCULAR DOMAIN NODES WITH ANTIGRAVITY LEVITATION ── */}
+        {DOMAINS.map((domain, idx) => {
           const isSelected = domain.id === selectedId;
           const isHoveredDomain = hoveredDomainId === domain.id && !isSelected;
           const pos = getCirclePosition(domain.id);
-          const scale = isHoveredDomain ? 1.06 : 1;
+          
+          // Anti-gravity float oscillation physics
+          const floatY = Math.sin(floatTime * 2.5 + idx * 1.5) * 5;
+          const floatX = Math.cos(floatTime * 2.0 + idx * 1.2) * 4;
+          
+          // Cursor anti-gravity displacement
+          const cursorX = mouseOffset.x * (isSelected ? 0.2 : 0.8);
+          const cursorY = mouseOffset.y * (isSelected ? 0.2 : 0.8);
+          
+          const scale = isHoveredDomain ? 1.08 : 1;
 
           let circleClass = styles.domainCircleInactive;
           if (isSelected) {
@@ -265,7 +319,7 @@ export default function SkillsSection() {
               key={domain.id}
               className={`${styles.domainCircle} ${circleClass}`}
               style={{
-                transform: `translate3d(${pos.x}px, ${pos.y}px, 0) scale(${scale})`
+                transform: `translate3d(${pos.x + floatX + cursorX}px, ${pos.y + floatY + cursorY}px, 0) scale(${scale})`
               }}
               onClick={() => handleDomainClick(domain.id)}
               onMouseEnter={() => setHoveredDomainId(domain.id)}
@@ -303,13 +357,16 @@ export default function SkillsSection() {
           const currentAngle = (baseAngle + orbitAngle) % 360;
           const rad = (currentAngle * Math.PI) / 180;
           
+          // Anti-gravity micro bobbing
+          const skillFloat = Math.sin(floatTime * 3 + idx) * 3;
+
           const centerOffset = screenType === 'mobile' 
             ? { x: 0, y: 90 } 
             : screenType === 'tablet' 
               ? { x: 180, y: 0 } 
               : { x: 230, y: 0 };
-          const x = centerOffset.x + Math.cos(rad) * orbitRadius;
-          const y = centerOffset.y + Math.sin(rad) * orbitRadius;
+          const x = centerOffset.x + Math.cos(rad) * orbitRadius + mouseOffset.x * 0.3;
+          const y = centerOffset.y + Math.sin(rad) * orbitRadius + skillFloat + mouseOffset.y * 0.3;
           const isSkillHovered = hoveredSkill === skill;
 
           return (
@@ -338,4 +395,5 @@ export default function SkillsSection() {
     </section>
   );
 }
+
 

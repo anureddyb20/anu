@@ -101,7 +101,7 @@
   transform: translateX(-3px);
 }
 
-/* ── PURE CIRCULAR STAGE CONTAINER ── */
+/* ── PURE CIRCULAR STAGE CONTAINER & ANTIGRAVITY FIELD ── */
 .ecosystemStage {
   position: relative;
   width: 100%;
@@ -112,6 +112,26 @@
   align-items: center;
   justify-content: center;
   user-select: none;
+  transition: transform 0.2s ease-out;
+  transform-style: preserve-3d;
+}
+
+.antigravityParticlesField {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.antigravityParticle {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0.25;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  transition: transform 0.1s linear, left 0.1s linear, top 0.1s linear;
 }
 
 /* Central Prompt Core Node (Tangent to 4 surrounding circles) */
