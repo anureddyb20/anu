@@ -120,8 +120,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 190px;
-  height: 190px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #181818 0%, #101010 100%);
   border: 1px dashed rgba(255, 255, 255, 0.2);
@@ -394,6 +394,12 @@
 
   .ecosystemStage {
     height: 520px;
+  }
+
+  .centerPromptNode {
+    width: 100px;
+    height: 100px;
+    padding: 0.8rem;
   }
 
   .domainCircleInactive {

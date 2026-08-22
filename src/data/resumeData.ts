@@ -49,7 +49,7 @@ export const resumeData: ResumeData = {
   skills: {
     programming: ['C', 'Python', 'JavaScript'],
     frontend: ['HTML', 'CSS', 'React'],
-    tools: ['GitHub', 'VS Code', 'Supabase'],
+    tools: ['GitHub', 'VS Code', 'Supabase', 'Antigravity'],
     softSkills: ['Communication', 'Teamwork', 'Problem Solving'],
   },
   workshops: [

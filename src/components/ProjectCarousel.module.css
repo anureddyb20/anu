@@ -2,86 +2,143 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 1.5rem 0 3rem 0;
+  padding: 1.5rem 0 1rem 0;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
   /* Cinematic edge gradient masks */
   mask-image: linear-gradient(
     to right,
     transparent 0%,
-    black 6%,
-    black 94%,
+    black 5%,
+    black 95%,
     transparent 100%
   );
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
-    black 6%,
-    black 94%,
+    black 5%,
+    black 95%,
     transparent 100%
   );
 }
 
-.trackContainer {
-  display: flex;
-  width: max-content;
-  cursor: default;
-  user-select: none;
+.trackStage {
+  width: 100%;
+  cursor: grab;
+  touch-action: pan-y;
 }
 
-.marqueeTrack {
+.trackStage.isDragging {
+  cursor: grabbing !important;
+}
+
+.trackStage.isDragging * {
+  cursor: grabbing !important;
+}
+
+.carouselTrack {
   display: flex;
   gap: 2rem;
-  padding: 1rem 1rem;
+  padding: 1rem 0;
   will-change: transform;
-  animation: marqueeRightToLeft 42s linear infinite;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-@keyframes marqueeRightToLeft {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.carouselTrack.isDraggingTrack {
+  transition: none !important;
 }
 
-/* Only pause when a card is clicked and modal is active */
-.carouselWrapper.paused .marqueeTrack,
-.paused .marqueeTrack {
-  animation-play-state: paused !important;
+/* Navigation controls row */
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .marqueeTrack {
-    animation: none;
-    overflow-x: auto;
-    width: 100%;
-    justify-content: flex-start;
-  }
+.navBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #111111;
+  border: 1px solid #292929;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.navBtn:hover,
+.navBtn:focus-visible {
+  background: #1c1c1c;
+  border-color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+}
+
+.navBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  border-color: #292929;
+}
+
+.dotsRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #333333;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.dotActive {
+  background: #ffffff;
+  width: 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 @media (max-width: 768px) {
-  .marqueeTrack {
-    gap: 1.25rem;
-    animation-duration: 32s;
-    padding: 0.75rem 0.5rem;
-  }
-
   .carouselWrapper {
-    padding: 1rem 0 2rem 0;
+    padding: 1rem 0 1rem 0;
     mask-image: linear-gradient(
       to right,
       transparent 0%,
-      black 3%,
-      black 97%,
+      black 2%,
+      black 98%,
       transparent 100%
     );
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0%,
-      black 3%,
-      black 97%,
+      black 2%,
+      black 98%,
       transparent 100%
     );
+  }
+
+  .carouselTrack {
+    gap: 1.25rem;
+    padding: 0.5rem 0;
+  }
+
+  .navBtn {
+    width: 36px;
+    height: 36px;
   }
 }

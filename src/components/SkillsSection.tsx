@@ -31,7 +31,7 @@ const DOMAINS: DomainData[] = [
     name: 'TOOLS & DESIGN',
     subtitle: 'Workflow & UI',
     description: 'Designing, deploying and managing modern digital products.',
-    skills: ['Git', 'GitHub', 'Vercel', 'Figma', 'Canva', 'UI/UX Design']
+    skills: ['GitHub', 'Vercel', 'Figma', 'Git', 'Canva', 'Antigravity', 'UI/UX Design']
   },
   {
     id: 'backend',
@@ -94,18 +94,18 @@ export default function SkillsSection() {
     if (selectedId === null) {
       if (isMobile) {
         const initialMobileMap: Record<string, { x: number; y: number }> = {
-          frontend: { x: 0, y: -140 },
-          hardware: { x: 130, y: 30 },
-          tools: { x: 0, y: 140 },
-          backend: { x: -130, y: 30 }
+          frontend: { x: 0, y: -110 },
+          hardware: { x: 110, y: 0 },
+          tools: { x: 0, y: 110 },
+          backend: { x: -110, y: 0 }
         };
         return initialMobileMap[domainId] || { x: 0, y: 0 };
       }
       const initialDesktopMap: Record<string, { x: number; y: number }> = {
-        frontend: { x: 0, y: -190 },
-        hardware: { x: 210, y: 30 },
-        tools: { x: 0, y: 190 },
-        backend: { x: -210, y: 30 }
+        frontend: { x: 0, y: -142 },
+        hardware: { x: 142, y: 0 },
+        tools: { x: 0, y: 142 },
+        backend: { x: -142, y: 0 }
       };
       return initialDesktopMap[domainId] || { x: 0, y: 0 };
     }
@@ -262,7 +262,9 @@ export default function SkillsSection() {
         {/* ── EMERGING ORBITING SKILL NODES (Active Category) ── */}
         {activeDomain && activeDomain.skills.map((skill, idx) => {
           const total = activeDomain.skills.length;
-          const orbitRadius = isMobile ? 145 : 215;
+          const orbitRadius = isMobile 
+            ? (total > 6 ? 155 : 145) 
+            : (total > 6 ? 230 : 215);
           const baseAngle = (idx * 360) / total;
           const currentAngle = (baseAngle + orbitAngle) % 360;
           const rad = (currentAngle * Math.PI) / 180;
