@@ -1,22 +1,9 @@
-.carouselContainer {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
 .carouselWrapper {
   position: relative;
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   padding: 1.5rem 0 3rem 0;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  cursor: grab;
-  user-select: none;
-  scroll-behavior: smooth;
-  /* Mask image edge gradients */
+  /* Cinematic edge gradient masks */
   mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -33,66 +20,51 @@
   );
 }
 
-.carouselWrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.carouselWrapper.dragging {
-  cursor: grabbing;
-  scroll-behavior: auto !important;
+.trackContainer {
+  display: flex;
+  width: max-content;
+  cursor: default;
+  user-select: none;
 }
 
 .marqueeTrack {
   display: flex;
   gap: 2rem;
-  padding: 1rem 2rem;
-  width: max-content;
+  padding: 1rem 1rem;
+  will-change: transform;
+  animation: marqueeRightToLeft 42s linear infinite;
 }
 
-/* Manual Navigation Buttons */
-.navButton {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 20;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(17, 17, 17, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-  transition: all 0.25s ease;
-  outline: none;
+@keyframes marqueeRightToLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-.navButton:hover,
-.navButton:focus-visible {
-  background: #ffffff;
-  color: #000000;
-  border-color: #ffffff;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-  transform: translateY(-50%) scale(1.1);
+/* Only pause when a card is clicked and modal is active */
+.carouselWrapper.paused .marqueeTrack,
+.paused .marqueeTrack {
+  animation-play-state: paused !important;
 }
 
-.navLeft {
-  left: 1.5rem;
-}
-
-.navRight {
-  right: 1.5rem;
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack {
+    animation: none;
+    overflow-x: auto;
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 768px) {
   .marqueeTrack {
     gap: 1.25rem;
-    padding: 0.75rem 1rem;
+    animation-duration: 32s;
+    padding: 0.75rem 0.5rem;
   }
 
   .carouselWrapper {
@@ -112,18 +84,4 @@
       transparent 100%
     );
   }
-
-  .navButton {
-    width: 36px;
-    height: 36px;
-  }
-
-  .navLeft {
-    left: 0.5rem;
-  }
-
-  .navRight {
-    right: 0.5rem;
-  }
 }
-
