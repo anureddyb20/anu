@@ -5,6 +5,7 @@ import SkillsSection from '@/components/SkillsSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import CertificatesSection from '@/components/CertificatesSection';
 import ResumeSection from '@/components/ResumeSection';
+import ConnectSection from '@/components/ConnectSection';
 
 import styles from './page.module.css';
 
@@ -18,10 +19,7 @@ export default function Home() {
       <ProjectsSection />
       <CertificatesSection />
       <ResumeSection />
-      
-      {/* Additional sections can be added here */}
-      <div className={styles.spacer}></div>
+      <ConnectSection />
     </main>
   );
 }
-
