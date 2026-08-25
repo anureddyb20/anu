@@ -248,24 +248,7 @@ export default function ConnectSection() {
           })}
         </div>
       </div>
-
-      {/* Minimal Footer */}
-      <footer className={styles.footer}>
-        <div className={styles.footerContent}>
-          <span className={styles.copyright}>
-            © {new Date().getFullYear()} ANU REDDY B. Built with Next.js & React.
-          </span>
-          <div className={styles.footerLinks}>
-            <a href={resumeData.linkedin} target="_blank" rel="noopener noreferrer">
-              LinkedIn
-            </a>
-            <a href={resumeData.github} target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-            <a href={`mailto:${resumeData.email}`}>Email</a>
-          </div>
-        </div>
-      </footer>
     </section>
   );
 }
+
