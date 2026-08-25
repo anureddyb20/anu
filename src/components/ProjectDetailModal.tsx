@@ -56,54 +56,42 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
-      aria-labelledby="browser-project-title"
+      aria-labelledby="compact-project-title"
     >
-      {/* Expandable Browser Window Container */}
-      <div className={styles.browserWindow} ref={windowRef}>
-        {/* Browser Top Navigation Bar */}
-        <div className={styles.browserHeader}>
-          {/* Traffic Light Control Dots */}
-          <div className={styles.trafficLights}>
+      {/* Compact Moderate-Sized Window */}
+      <div className={styles.compactWindow} ref={windowRef}>
+        {/* Subtle Minimal Window Header */}
+        <div className={styles.windowHeader}>
+          {/* Small Window Control Dots */}
+          <div className={styles.controlDots}>
             <button
               type="button"
               className={`${styles.dot} ${styles.redDot}`}
               onClick={onClose}
-              title="Close window"
-              aria-label="Close project window"
+              title="Close"
+              aria-label="Close window"
             />
             <span className={`${styles.dot} ${styles.yellowDot}`} />
             <span className={`${styles.dot} ${styles.greenDot}`} />
           </div>
 
-          {/* Browser Address Bar */}
-          <div className={styles.addressBar}>
-            <svg
-              className={styles.lockIcon}
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-            >
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-            <span className={styles.urlText}>
-              https://anureddy.dev/projects/{project.id}
-            </span>
+          {/* Minimal Header Title */}
+          <div className={styles.headerTag}>
+            <span>{project.name}</span>
+            <span className={styles.headerDivider}>•</span>
+            <span className={styles.headerCategory}>{primaryCategory}</span>
           </div>
 
-          {/* Window Close Action Button */}
+          {/* Close Action Button */}
           <button
             type="button"
             className={styles.headerCloseBtn}
             onClick={onClose}
-            aria-label="Close project detail view"
+            aria-label="Close project view"
           >
             <svg
-              width="16"
-              height="16"
+              width="14"
+              height="14"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -115,65 +103,50 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
           </button>
         </div>
 
-        {/* Browser Content Body */}
-        <div className={styles.browserBody}>
-          {/* Project Screenshot Visual Stage */}
-          <div className={styles.screenshotFrame}>
+        {/* Window Body Container */}
+        <div className={styles.windowBody}>
+          {/* Project Screenshot Visual */}
+          <div className={styles.imageStage}>
             <Image
               src={project.image}
-              alt={`High quality project preview of ${project.name}`}
+              alt={`Visual dashboard preview of ${project.name}`}
               fill
-              sizes="(max-width: 768px) 100vw, 840px"
-              className={styles.screenshotImage}
+              sizes="(max-width: 768px) 100vw, 760px"
+              className={styles.projectImage}
               priority
             />
-            <div className={styles.categoryPillOverlay}>{project.category}</div>
           </div>
 
-          {/* Project Details Section */}
-          <div className={styles.detailsContent}>
-            <div className={styles.mainTitleRow}>
-              <div>
-                <span className={styles.categorySubhead}>{primaryCategory}</span>
-                <h2 id="browser-project-title" className={styles.projectTitle}>
-                  {project.name}
-                </h2>
-              </div>
+          {/* Project Details Content */}
+          <div className={styles.infoContent}>
+            {/* Title & Category */}
+            <div className={styles.titleGroup}>
+              <span className={styles.typeBadge}>{project.category}</span>
+              <h2 id="compact-project-title" className={styles.projectTitle}>
+                {project.name}
+              </h2>
             </div>
 
-            {/* Short Description (2-3 lines) */}
-            <div className={styles.sectionBlock}>
-              <span className={styles.sectionHeading}>Overview</span>
-              <p className={styles.descriptionText}>{project.description}</p>
-            </div>
+            {/* Overview */}
+            <p className={styles.descriptionText}>{project.description}</p>
 
-            {/* Key Features (if present) */}
+            {/* Key Features List */}
             {project.features && project.features.length > 0 && (
-              <div className={styles.sectionBlock}>
+              <div className={styles.featuresSection}>
                 <span className={styles.sectionHeading}>Key Features</span>
-                <ul className={styles.featureGrid}>
+                <div className={styles.featureGrid}>
                   {project.features.map((feat, idx) => (
-                    <li key={idx} className={styles.featureBullet}>
-                      <svg
-                        className={styles.bulletCheck}
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                      >
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
+                    <div key={idx} className={styles.featureItem}>
+                      <span className={styles.checkIcon}>✓</span>
                       <span>{feat}</span>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
 
             {/* Tech Stack Badges */}
-            <div className={styles.sectionBlock}>
+            <div className={styles.techSection}>
               <span className={styles.sectionHeading}>Technologies Used</span>
               <div className={styles.techWrapper}>
                 {project.techStack.map((tech, idx) => (
@@ -182,25 +155,14 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
               </div>
             </div>
 
-            {/* Bottom Footer Actions Bar (Close button only, ZERO GitHub links) */}
-            <div className={styles.footerRow}>
+            {/* Compact Close Button Bar (ZERO GitHub links) */}
+            <div className={styles.buttonBar}>
               <button
                 type="button"
-                className={styles.closeWindowBtn}
+                className={styles.closeBtn}
                 onClick={onClose}
               >
-                <span>Close Project Window</span>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
+                <span>Close</span>
               </button>
             </div>
           </div>
