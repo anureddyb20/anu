@@ -344,24 +344,26 @@
   box-shadow: 0 0 8px #ffffff;
 }
 
-/* Hover Info Card */
+/* Hover Info Card (Clean Vertical Stack Layout) */
 .infoCard {
   position: absolute;
-  width: 220px;
-  background: #161616;
+  width: 240px;
+  background: #141414;
   border: 1px solid #333333;
   border-radius: 12px;
   padding: 0.85rem 1rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  align-items: flex-start;
+  gap: 0.35rem;
   opacity: 0;
   visibility: hidden;
   transform: translateY(8px) scale(0.95);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
   z-index: 10;
+  text-align: left;
 }
 
 .cardVisible {
@@ -371,7 +373,7 @@
 }
 
 .node_linkedin .infoCard {
-  top: 50px;
+  top: 52px;
   left: 50%;
   transform: translateX(-50%) translateY(8px);
 }
@@ -401,23 +403,21 @@
   right: 0;
 }
 
-.cardHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.cardType {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
 }
 
 .cardTitle {
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #ffffff;
-}
-
-.cardType {
-  font-size: 0.68rem;
-  color: #888888;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  margin: 0;
+  line-height: 1.25;
 }
 
 .cardTagline {
@@ -432,7 +432,7 @@
   font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.05em;
-  margin-top: 0.2rem;
+  margin-top: 0.25rem;
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -540,7 +540,7 @@
   }
 
   .infoCard {
-    display: none; /* Hide hover popups on touch mobile to keep clean */
+    display: none;
   }
 
   .footerContent {

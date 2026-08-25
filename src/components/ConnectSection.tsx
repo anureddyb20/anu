@@ -236,10 +236,8 @@ export default function ConnectSection() {
                     isHovered ? styles.cardVisible : ''
                   }`}
                 >
-                  <div className={styles.cardHeader}>
-                    <span className={styles.cardTitle}>{node.label}</span>
-                    <span className={styles.cardType}>{node.type}</span>
-                  </div>
+                  <span className={styles.cardType}>{node.type}</span>
+                  <h4 className={styles.cardTitle}>{node.label}</h4>
                   <p className={styles.cardTagline}>"{node.tagline}"</p>
                   <div className={styles.cardAction}>
                     <span>{node.actionText}</span>
