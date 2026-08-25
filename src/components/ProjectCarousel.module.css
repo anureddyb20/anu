@@ -1,71 +1,71 @@
-.carouselWrapper {
+.railContainer {
   position: relative;
   width: 100%;
-  overflow: hidden;
-  padding: 1.5rem 0 1rem 0;
-  touch-action: pan-y;
-  user-select: none;
-  -webkit-user-select: none;
-  /* Cinematic edge gradient masks */
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 5%,
-    black 95%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 5%,
-    black 95%,
-    transparent 100%
-  );
-}
-
-.trackStage {
-  width: 100%;
-  cursor: grab;
-  touch-action: pan-y;
-}
-
-.trackStage.isDragging {
-  cursor: grabbing !important;
-}
-
-.trackStage.isDragging * {
-  cursor: grabbing !important;
-}
-
-.carouselTrack {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem 0;
   display: flex;
-  gap: 2rem;
-  padding: 1rem 0;
-  will-change: transform;
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
-.carouselTrack.isDraggingTrack {
-  transition: none !important;
+/* Horizontal Scrollable Rail */
+.projectRail {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  padding: 1.5rem 0;
+  cursor: grab;
+  user-select: none;
 }
 
-/* Navigation controls row */
+.projectRail::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.isDragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
+
+.railTrack {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  padding: 0 max(2rem, calc((100vw - 380px) / 2));
+  width: max-content;
+}
+
+.cardWrapper {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: center;
+}
+
+/* Navigation Controls Row */
 .controlsRow {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1.5rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .navBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: #111111;
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid #292929;
   color: #ffffff;
   cursor: pointer;
@@ -73,26 +73,27 @@
   outline: none;
 }
 
-.navBtn:hover,
-.navBtn:focus-visible {
-  background: #1c1c1c;
+.navBtn:hover:not(:disabled) {
+  background: #ffffff;
+  color: #000000;
   border-color: #ffffff;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
 }
 
 .navBtn:disabled {
-  opacity: 0.3;
+  opacity: 0.25;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-  border-color: #292929;
 }
 
 .dotsRow {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  padding: 0.4rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid #222222;
+  border-radius: 9999px;
 }
 
 .dot {
@@ -101,44 +102,34 @@
   border-radius: 50%;
   background: #333333;
   border: none;
-  cursor: pointer;
   padding: 0;
-  transition: all 0.3s ease;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dotHover {
+  background: #666666;
 }
 
 .dotActive {
-  background: #ffffff;
   width: 24px;
-  border-radius: 12px;
+  border-radius: 9999px;
+  background: #ffffff;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 @media (max-width: 768px) {
-  .carouselWrapper {
-    padding: 1rem 0 1rem 0;
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 2%,
-      black 98%,
-      transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 2%,
-      black 98%,
-      transparent 100%
-    );
-  }
-
-  .carouselTrack {
+  .railTrack {
     gap: 1.25rem;
-    padding: 0.5rem 0;
+    padding: 0 1.5rem;
   }
 
   .navBtn {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .controlsRow {
+    gap: 1rem;
   }
 }

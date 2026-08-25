@@ -5,10 +5,11 @@ import styles from './ProjectCard.module.css';
 
 interface ProjectCardProps {
   project: Project;
+  isActive?: boolean;
   onSelect: (project: Project) => void;
 }
 
-export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
+export default function ProjectCard({ project, isActive = false, onSelect }: ProjectCardProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -16,9 +17,11 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
     }
   };
 
+  const primaryCategory = project.category.split('•')[0].trim();
+
   return (
     <div
-      className={styles.card}
+      className={`${styles.card} ${isActive ? styles.activeCard : styles.inactiveCard}`}
       onClick={() => onSelect(project)}
       onKeyDown={handleKeyDown}
       tabIndex={0}
@@ -26,7 +29,7 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
       aria-haspopup="dialog"
       aria-label={`View details for ${project.name}`}
     >
-      {/* Project Visual */}
+      {/* Project Visual Screenshot */}
       <div className={styles.imageContainer}>
         <Image
           src={project.image}
@@ -37,7 +40,7 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
           priority={false}
         />
         <div className={styles.imageOverlay} />
-        <span className={styles.categoryTag}>{project.category.split('•')[0].trim()}</span>
+        <span className={styles.categoryTag}>{primaryCategory}</span>
       </div>
 
       {/* Card Info */}
