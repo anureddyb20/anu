@@ -370,6 +370,7 @@
   opacity: 1;
   visibility: visible;
   transform: translateY(0) scale(1);
+  pointer-events: auto;
 }
 
 .node_linkedin .infoCard {
@@ -436,6 +437,14 @@
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.cardAction:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 /* Responsive Styles for Mobile and Tablet */

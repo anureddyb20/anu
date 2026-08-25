@@ -11,6 +11,7 @@ interface ContactNode {
   tagline: string;
   actionText: string;
   url: string;
+  ariaLabel: string;
   icon: React.ReactNode;
   svgPath: string; // Path coordinates for connection line in 800x500 viewBox
 }
@@ -18,6 +19,9 @@ interface ContactNode {
 export default function ConnectSection() {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [clickedNode, setClickedNode] = useState<string | null>(null);
+
+  // Formatted phone number for tel: protocol with international +91 country code
+  const phoneTelUrl = `tel:+91${resumeData.phone.replace(/[^0-9]/g, '')}`;
 
   // Define contact nodes matching exact data from resumeData
   const nodes: ContactNode[] = [
@@ -27,6 +31,7 @@ export default function ConnectSection() {
       type: 'Professional Network',
       tagline: "Let's connect professionally.",
       actionText: 'OPEN PROFILE ↗',
+      ariaLabel: 'Open Anu Reddy LinkedIn Profile',
       url: resumeData.linkedin,
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -43,6 +48,7 @@ export default function ConnectSection() {
       type: 'Direct Message',
       tagline: 'Have an idea or opportunity?',
       actionText: 'SEND EMAIL ↗',
+      ariaLabel: 'Send email to Anu Reddy',
       url: `https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}`,
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -58,6 +64,7 @@ export default function ConnectSection() {
       type: 'Code & Projects',
       tagline: 'Explore my open-source code.',
       actionText: 'VIEW GITHUB ↗',
+      ariaLabel: 'Open Anu Reddy GitHub Profile',
       url: resumeData.github,
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -72,6 +79,7 @@ export default function ConnectSection() {
       type: 'PDF Document',
       tagline: 'View my professional profile.',
       actionText: 'VIEW RESUME ↗',
+      ariaLabel: 'View Anu Reddy Resume PDF',
       url: resumeData.pdfUrl,
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -90,7 +98,8 @@ export default function ConnectSection() {
       type: 'Phone Contact',
       tagline: 'Available for direct inquiries.',
       actionText: 'CALL NOW ↗',
-      url: `tel:${resumeData.phone}`,
+      ariaLabel: 'Call Anu',
+      url: phoneTelUrl,
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -100,15 +109,22 @@ export default function ConnectSection() {
     },
   ];
 
-  const handleNodeClick = (node: ContactNode, e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleNodeClick = (node: ContactNode, e: React.MouseEvent<HTMLAnchorElement>) => {
     setClickedNode(node.id);
 
-    // Trigger signal pulse towards center before navigating
+    if (node.id === 'phone' || node.url.startsWith('tel:')) {
+      // Native tel: link handler directly invokes device dialer without opening blank browser tab
+      setTimeout(() => {
+        setClickedNode(null);
+      }, 400);
+      return;
+    }
+
+    e.preventDefault();
     setTimeout(() => {
       window.open(node.url, '_blank', 'noopener,noreferrer');
       setClickedNode(null);
-    }, 250);
+    }, 200);
   };
 
   return (
@@ -216,14 +232,14 @@ export default function ConnectSection() {
                 onMouseEnter={() => setHoveredNode(node.id)}
                 onMouseLeave={() => setHoveredNode(null)}
               >
-                {/* Node Main Button */}
+                {/* Node Main Link Button */}
                 <a
                   href={node.url}
                   onClick={(e) => handleNodeClick(node, e)}
                   className={`${styles.nodeBtn} ${isHovered ? styles.nodeHovered : ''} ${
                     isClicked ? styles.nodeClicked : ''
                   }`}
-                  aria-label={`${node.label} - ${node.tagline}`}
+                  aria-label={node.ariaLabel}
                 >
                   <div className={styles.nodeIconWrapper}>{node.icon}</div>
                   <span className={styles.nodeLabel}>{node.label}</span>
@@ -239,9 +255,14 @@ export default function ConnectSection() {
                   <span className={styles.cardType}>{node.type}</span>
                   <h4 className={styles.cardTitle}>{node.label}</h4>
                   <p className={styles.cardTagline}>"{node.tagline}"</p>
-                  <div className={styles.cardAction}>
+                  <a
+                    href={node.url}
+                    onClick={(e) => handleNodeClick(node, e)}
+                    className={styles.cardAction}
+                    aria-label={node.ariaLabel}
+                  >
                     <span>{node.actionText}</span>
-                  </div>
+                  </a>
                 </div>
               </div>
             );
@@ -251,4 +272,3 @@ export default function ConnectSection() {
     </section>
   );
 }
-
